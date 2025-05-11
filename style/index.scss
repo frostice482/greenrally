@@ -1,0 +1,94 @@
+@use "util-mixin.scss" as mixin;
+@use "util.scss";
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+header {
+    height: 3em;
+    padding: 8px 16px;
+    background: #D7E1C8;
+
+    display: grid;
+    grid-template-columns: 3fr 5fr 3fr;
+    overflow: hidden;
+    align-items: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+.popup {
+    position: fixed;
+    z-index: 10;
+}
+
+.popup.blur {
+    background: #0007;
+}
+
+.rally {
+    width: 33vw;
+    height: 300px;
+
+    background-position: center;
+    background-size: cover;
+
+    border: 2px solid #285D00;
+    border-radius: 0.4em;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    & > div {
+        padding: 8px;
+        background: #0006;
+    }
+
+    &:hover {
+        border-color: #079;
+    }
+
+    &:hover > div {
+        height: 100%;
+        background: #0009;
+    }
+
+    &:not(:hover) .rally-detail {
+        display: none;
+    }
+}
+
+.rally-detail > :first-child {
+    flex-grow: 1;
+}
+
+#title {
+    font-weight: 450;
+    font-family: Merienda, 'Open Sans';
+    color: #285D00;
+    filter: drop-shadow(2px 3px 0px #0002);
+}
+
+#search {
+    height: 100%;
+    padding: 6px 12px;
+    box-sizing: border-box;
+
+    background: #E8D7C7;
+    border: 1px solid #285D00;
+    border-radius: 1em;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

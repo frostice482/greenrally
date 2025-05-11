@@ -1,0 +1,65 @@
+@use "sass:list";
+@mixin fill-x($size: 100%) { width: var(--fillsize, $size); }
+@mixin fill-y($size: 100%) { height: var(--fillsize, $size); }
+
+@mixin fill($size: 100%) {
+	@include fill-x($size);
+	@include fill-y($size);
+}
+
+@mixin bigside($mode) {
+	@include grid-child(a, b, c, d);
+	align-items: center;
+
+	@if $mode == 'left' {
+		grid-template-areas:
+			'a b d'
+			'a c d'
+		;
+		grid-template-columns: auto 1fr auto;
+		gap: 0 8px;
+	}
+	@else if $mode == 'right' {
+		grid-template-areas:
+			'd b a'
+			'd c a'
+		;
+		grid-template-columns: auto 1fr auto;
+		gap: 0 8px;
+	}
+	@else if $mode == 'bottom' {
+		grid-template-areas:
+			'd d'
+			'b c'
+			'a a'
+		;
+		grid-template-rows: auto 1fr auto;
+		gap: 8px 0;
+	}
+	@else if $mode == 'top' {
+		grid-template-areas:
+			'a a'
+			'b c'
+			'd d'
+		;
+		grid-template-columns: auto 1fr auto;
+		gap: 8px 0;
+	}
+}
+
+@mixin grid-child($grid-area...) {
+	display: grid;
+	@for $i from 1 to list.length($grid-area)+1 {
+		& > :nth-child(#{$i}) {
+			grid-area: #{list.nth($grid-area, $i)}
+		}
+	}
+}
+
+@mixin grid-child-i($offset, $grid-area...) {
+	@for $i from 0 to list.length($grid-area) {
+		& > :nth-child(#{$i+$offset}) {
+			grid-area: #{list.nth($grid-area, $i+1)}
+		}
+	}
+}

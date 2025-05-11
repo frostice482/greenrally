@@ -1,0 +1,82 @@
+@use "util-mixin.scss" as mixin;
+
+.reset, .resetfont {
+	font-weight: unset;
+	font-family: unset;
+	font-size: unset;
+	color: unset;
+}
+
+.reset, .resetdisplay {
+	margin: 0;
+	padding: 0;
+	background: unset;
+	border: unset;
+    outline: none;
+}
+
+.ghostlayer { pointer-events: none; }
+.ghostlayer > * { pointer-events: unset; }
+
+input[type="text"].reset {
+	height: 1.4em;
+}
+
+img, .noselect {
+	user-select: none;
+	pointer-events: none;
+}
+
+.margin, .margin-top { margin-top: 8px; }
+.margin, .margin-bottom { margin-bottom: 8px; }
+.pad, .pad-top { padding-top: 8px; }
+.pad, .pad-bottom { padding-bottom: 8px; }
+
+.flow { overflow: auto; }
+.noflow { overflow: hidden; }
+
+.fill, .fill-x { width: 100%; }
+.fill, .fill-y { height: 100%; }
+
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+.noshrink { flex-shrink: 0 }
+
+.bigside-top {
+	@include mixin.grid-child(a, b, c);
+	grid-template-areas: 'a a' 'b c';
+}
+
+.bigside-left {
+	@include mixin.grid-child(a, b, c);
+	grid-template-areas: 'a b' 'a c';
+}
+
+.bigside-bottom {
+	@include mixin.grid-child(a, b, c);
+	grid-template-areas: 'a b' 'c c';
+}
+
+.bigside-right {
+	@include mixin.grid-child(a, b, c);
+	grid-template-areas: 'a c' 'b c';
+}
+
+.linelimit {
+	line-clamp: var(--lines, 1);
+	-webkit-line-clamp: var(--lines, 1);
+	box-orient: vertical;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+}
