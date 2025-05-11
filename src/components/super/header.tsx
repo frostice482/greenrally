@@ -40,8 +40,12 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
             }
         }
 
-        this.searchInput.addEventListener("focus", () => this.searchResult.hidden = false)
-        this.searchInput.addEventListener("blur", () => this.searchResult.hidden = true)
+        this.searchInput.addEventListener("focus", () => {
+            this.searchResult.hidden = false
+        })
+        this.searchInput.addEventListener("blur", () => {
+            this.searchResult.hidden = true
+        })
         resizeListener.listen(this.searchInput, () => this.realignSearchResult())
     }
 

@@ -4,6 +4,7 @@
 
 $col-background: #F7F6F1;
 $col-header: #D7E1C8;
+$col-bluedark: #00335d;
 $col-greendark: #285D00;
 $col-greenlight: #C4DBA0;
 $col-accent: #E8D7C7;
@@ -69,6 +70,10 @@ button:disabled {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    &.focus {
+        border-color: $col-bluedark;
+    }
 }
 
 #search-res {
@@ -89,10 +94,6 @@ button:disabled {
     & > div {
         padding: 4px 16px;
         background: #fffb;
-
-        & > img {
-            margin-right: 8px;
-        }
     }
 }
 
@@ -115,6 +116,19 @@ button:disabled {
     background: $col-darktr;
 }
 
+.uinput {
+    white-space: pre-wrap;
+    & > input {
+        border: 1px solid currentColor;
+        border-radius: 5px;
+    }
+}
+
+.uinput.invalid {
+    color: red;
+    & > input { border-color: red; }
+}
+
 .login-container {
     width: 350px;
     min-height: 300px;
@@ -130,17 +144,4 @@ button:disabled {
     & > button + * {
         margin-top: 8px;
     }
-}
-
-.uinput {
-    white-space: pre-wrap;
-    & > input {
-        border: 1px solid currentColor;
-        border-radius: 5px;
-    }
-}
-
-.uinput.invalid {
-    color: red;
-    & > input { border-color: red; }
 }
