@@ -10,27 +10,32 @@ export default class CHeader extends Component {
     }
 
     account = nodeState()
-    searchInput = <input id="searchinput" placeholder="Find a rally" type="text" class="fill reset"/>
+    searchInput = <input
+        id="searchinput"
+        placeholder="Find a rally"
+        type="text"
+        class="fill reset"
+    />
     searchBtn = <button id="searchbtn" class="reset">
         <img src={searchUrl} style={{height: "1em"}}/>
     </button>
 
-    search: ReactElement
-    node: ReactElement
+    search
+    node
 
     protected makeSearch() {
         return <div id="search">
-            {this.searchInput}
-            {this.searchBtn}
+            <div>
+                {this.searchInput}
+                {this.searchBtn}
+            </div>
         </div>
     }
 
     protected makeNode() {
         return <header>
             <h2 id="title">GreenRally</h2>
-            <div>
-                {this.search}
-            </div>
+            {this.search}
             {this.account()}
         </header>
     }

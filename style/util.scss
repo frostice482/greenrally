@@ -27,10 +27,8 @@ img, .noselect {
 	pointer-events: none;
 }
 
-.margin, .margin-top { margin-top: 8px; }
-.margin, .margin-bottom { margin-bottom: 8px; }
-.pad, .pad-top { padding-top: 8px; }
-.pad, .pad-bottom { padding-bottom: 8px; }
+.margin { margin: 8px; }
+.pad { padding: 8px; }
 
 .flow { overflow: auto; }
 .noflow { overflow: hidden; }

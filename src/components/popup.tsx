@@ -1,19 +1,39 @@
-import { Component, ReactElement } from "jsx-dom";
+import { ReactElement } from "jsx-dom"
+import { nodeState } from "lib/state"
+import TypedEventTarget from "lib/typedevt"
 
-export default class CPopup extends Component<CPopupOpts> {
-    constructor(props: CPopupOpts) {
-        super(props)
-        this.clickOutHide = props.clickOutHide ?? true
-        this.hoverOutHide = props.hoverOutHide ?? false
-        this.clickFocus = props.clickFocus ?? true
+export default class Popup extends TypedEventTarget<{  }> {
+    constructor(children: ReactElement, opts: PopupOpts = {}) {
+        super()
+        const node = <div class="popup">{this.children(children)}</div>
+        this.node = node
 
-        this.node = <div class="popup">
-            {props.children}
-        </div>
+        this.clickOutHide = opts.clickOutHide ?? true
+        this.hoverOutHide = opts.hoverOutHide ?? false
+        this.clickFocus = opts.clickFocus ?? true
 
-        if (props.blur) this.node.classList.add("blur")
-        if (!props.blockBackground) this.node.classList.add("ghostlayer")
+        if (opts.blur) node.classList.add("blur")
+        if (!opts.blockBackground) node.classList.add("ghostlayer")
 
+        children.addEventListener("click", () => this.handleOnClick())
+        children.addEventListener("click", () => this.handleOnHoverOut())
+    }
+
+    protected handleOnClick() {
+        this._clicked = true
+        this.focusCurrent = this.clickFocus
+    }
+
+    protected handleOnDocumentClick() {
+        if (this._clicked)
+            this._clicked = false
+        else
+            this.hide()
+    }
+
+    protected handleOnHoverOut() {
+        if (this.hoverOutHide && !this.clickFocus)
+            this.hide()
     }
 
     clickOutHide: boolean
@@ -21,23 +41,35 @@ export default class CPopup extends Component<CPopupOpts> {
     clickFocus: boolean
     focusCurrent = false
 
-    protected _shown = false
-    get shown() { return this._shown }
+    protected _clicked = false
+    protected _abort?: AbortController
+    get shown() { return Boolean(this._abort && !this._abort.signal.aborted) }
 
+    children = nodeState()
     node: ReactElement
 
     show() {
+        if (this.shown) return
+
+        this._abort = new AbortController
+        const sig = this._abort.signal
+
+        document.addEventListener("click", () => this.handleOnDocumentClick(), { signal: sig })
+        this.node.hidden = false
     }
 
     hide() {
+        if (!this.shown) return
+
+        this._abort?.abort()
+        this.node.hidden = true
     }
 }
 
-export interface CPopupOpts {
+export interface PopupOpts {
     clickOutHide?: boolean // true
     hoverOutHide?: boolean // false
     clickFocus?: boolean // true
     blur?: boolean // false
     blockBackground?: boolean // false
-    children?: any
 }

@@ -4,8 +4,9 @@ export default function Tag(opts: TagOptions) {
     const {name, ...btn} = opts
 
     const elm = jsx("button", btn)
-    elm.append(name)
-    elm.classList.add("tag")
+    if (!elm.childElementCount) elm.append(name)
+    elm.classList.add("rally-tag")
+    elm.classList.add("focuseffect")
     return elm
 }
 

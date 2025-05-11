@@ -16,6 +16,16 @@ data.loadJSON({
             participants: ["dummy"],
             tags: ["tag1", "tag2"],
             backgroundLink: "https://www.snexplores.org/wp-content/uploads/2020/04/1030_LL_trees-1028x579.png"
+        }], ["2", {
+            id: "2",
+            name: "another one",
+            description: lipsumLong,
+            author: "dummy",
+            startTime: Date.now(),
+            endTime: Date.now() + 3600 * 24 * 1000,
+            participants: ["dummy"],
+            tags: ["tag2", "tag3"],
+            backgroundLink: "https://www.snexplores.org/wp-content/uploads/2020/04/1030_LL_trees-1028x579.png"
         }]
     ],
     users: [
