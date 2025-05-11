@@ -2,10 +2,10 @@ import { jsx, JSX } from "jsx-dom/jsx-runtime"
 import { textState, ValueState } from "lib/state"
 
 export function StateButton(opts: StateButtonOptions & Omit<btn, 'onClick'>) {
-	let { textState: textStateProp = "", once, cOnClick, cOnClickError, ...btn } = opts
+	let { textState: textStateProp = "", once, cOnClick, cOnClickError} = opts
 
 	if (typeof textStateProp === 'string') textStateProp = textState(textStateProp)
-	const button = jsx("button", btn)
+	const button = jsx("button", opts)
 	if (textStateProp) button.append(textStateProp())
 
 	if (cOnClick) button.addEventListener('click', async ev => {
@@ -24,12 +24,11 @@ export function StateButton(opts: StateButtonOptions & Omit<btn, 'onClick'>) {
 }
 
 export function Tag(opts: TagOptions) {
-    const {name, ...btn} = opts
+    const {name} = opts
 
-    const elm = jsx("button", btn)
+    const elm = jsx("button", opts)
     if (!elm.childElementCount) elm.append(name)
     elm.classList.add("rally-tag")
-    elm.classList.add("focuseffect")
     return elm
 }
 

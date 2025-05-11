@@ -2,8 +2,8 @@ import { nodeState } from "lib/state";
 import BComp from "./bcomp";
 import searchUrl from "@/resources/search.svg?url"
 
-export default class Header extends BComp<CHeaderOpts> {
-    constructor(props: CHeaderOpts) {
+export default class Header extends BComp<HeaderOpts> {
+    constructor(props: HeaderOpts) {
         super(props)
         this.beforeRender()
         this.search = this.makeSearch()
@@ -16,7 +16,7 @@ export default class Header extends BComp<CHeaderOpts> {
         placeholder="Find a rally"
         type="search"
         class="fill reset"
-    />
+    /> as HTMLInputElement
     searchBtn = <button id="searchbtn" class="reset">
         <img src={searchUrl} style={{height: "1em"}}/>
     </button>
@@ -34,7 +34,7 @@ export default class Header extends BComp<CHeaderOpts> {
     }
 
     protected makeNode() {
-        return <header {...this.props}>
+        return <header>
             <h2 id="title">GreenRally</h2>
             {this.search}
             {this.account()}
@@ -46,4 +46,4 @@ export default class Header extends BComp<CHeaderOpts> {
     }
 }
 
-export interface CHeaderOpts extends E.header {}
+export interface HeaderOpts {}

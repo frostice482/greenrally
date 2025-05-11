@@ -47,7 +47,6 @@
     background: #886341;
     border-radius: 0.3em;
     color: white;
-    --hover-color: #51a2bb;
 }
 
 .rally-tag {
@@ -55,5 +54,6 @@
     background: #886341;
     border-radius: 0.3em;
     color: white;
-    --hover-color: #89a144;
+
+    &.focus { background: #89a144; }
 }

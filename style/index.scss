@@ -69,13 +69,6 @@ button:disabled {
     border-radius: 1em;
 }
 
-.focuseffect {
-    transition: background 0.1s;
-
-    &:is(:hover, .focus) {
-        background: var(--hover-color);
-    }
-}
 
 .popup {
     width: 100%;

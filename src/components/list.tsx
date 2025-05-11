@@ -82,7 +82,7 @@ export default class RallyList extends BComp<RallyListOpts> {
     }
 
     protected makeNode() {
-        return <div {...this.props} {...{ rallies: null, onRallyInfoClick: null }}>
+        return <div>
             <div class="margin">
                 {Array.from(this.tagHeaders.values())}
             </div>
@@ -96,7 +96,7 @@ export default class RallyList extends BComp<RallyListOpts> {
     }
 }
 
-export interface RallyListOpts extends E.div {
+export interface RallyListOpts {
     rallies: Iterable<Data.Rally>
     onRallyInfoClick?: () => void
 }

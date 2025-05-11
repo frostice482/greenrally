@@ -1,5 +1,5 @@
 diff --git a/index.js b/index.js
-index db75f0b824cd8c0732981542dd0f0b06fb5e2ec5..b6c957434435b4c4b68c8e61595126afef253cbe 100644
+index db75f0b824cd8c0732981542dd0f0b06fb5e2ec5..0fc788308b928ce39fa8491609893f2b6db09639 100644
 --- a/index.js
 +++ b/index.js
 @@ -350,7 +350,9 @@ function appendChild(child, node) {
@@ -13,6 +13,25 @@ index db75f0b824cd8c0732981542dd0f0b06fb5e2ec5..b6c957434435b4c4b68c8e61595126af
    } else if (child === null) {
      appendChildToNode(document.createComment(""), node);
    } else if (isElement(child)) {
+@@ -515,15 +517,13 @@ function attribute(key, value, node) {
+         node.addEventListener(eventName, value);
+       }
+     }
+-  } else if (isObject(value)) {
+-    node[key] = value;
+-  } else if (value === true) {
+-    attr(node, key, "");
++  } else if (key in node) {
++    node[key] = value
+   } else if (value !== false && value != null) {
+     if (node instanceof SVGElement && !nonPresentationSVGAttributes.test(key)) {
+       attr(node, normalizeAttribute(key, "-"), value);
+     } else {
+-      attr(node, key, value);
++      console.warn("discarded property", key, "with value", value, "to node", node)
+     }
+   }
+ }
 diff --git a/types/index.d.ts b/types/index.d.ts
 index 9c5a15089d9140c27e48ee48d5bd0b603be1b86b..424d5dfaa7a69e525a1f98bf8c3b060772e40c72 100644
 --- a/types/index.d.ts

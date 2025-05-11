@@ -39,7 +39,7 @@ export default class Login extends BComp<LoginOpts> {
     }
 
     protected makeNode() {
-        return <form class="fill center" {...this.props} {...{onLogin: null}}>
+        return <form class="fill center">
             {this.container}
         </form>
     }
@@ -54,7 +54,7 @@ export default class Login extends BComp<LoginOpts> {
     }
 }
 
-export interface LoginOpts extends E.form {
+export interface LoginOpts {
     onLogin?: (self: Login, username: string, password: string) => void
     onSwitch?: () => void
 }

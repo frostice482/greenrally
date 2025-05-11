@@ -1,8 +1,8 @@
 import BComp from "./bcomp";
 import { Tag } from "./util";
 
-export default class Rally extends BComp<CRallyOpts> {
-    constructor(param: CRallyOpts) {
+export default class Rally extends BComp<RallyOpts> {
+    constructor(param: RallyOpts) {
         super(param)
         this.detail = this.makeDetail()
         this.summary = this.makeSummary()
@@ -21,7 +21,7 @@ export default class Rally extends BComp<CRallyOpts> {
             <div style={{overflow: 'auto'}}>{rally.description}</div>
             <div class="flex-row justify-between margin-top">
                 <small>Tags: {rally.tags.map(v => <Tag name={v} onClick={() => this.props.onTagClick?.(v)}/>)}</small>
-                <button class="rally-info focuseffect" onClick={this.props.onInfoClick}>Info</button>
+                <button class="rally-info" onClick={this.props.onInfoClick}>Info</button>
             </div>
         </div>
     }
@@ -49,7 +49,7 @@ export default class Rally extends BComp<CRallyOpts> {
     }
 }
 
-export interface CRallyOpts {
+export interface RallyOpts {
     rally: Data.Rally
     onInfoClick?: () => void
     onTagClick?: (tag: string) => void

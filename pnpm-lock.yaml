@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   jsx-dom:
-    hash: 3de3d718783f48ae5b00d276d7d3fbf25d82b09b2dd1c6d944d80aa3df78ee64
+    hash: 21f476f8db1d90aaf33cedc1eac0cd7db920f0fa312365095a3409f0c5e2ae1b
     path: patches/jsx-dom.patch
 
 importers:
@@ -19,7 +19,7 @@ importers:
     devDependencies:
       jsx-dom:
         specifier: ^8.1.6
-        version: 8.1.6(patch_hash=3de3d718783f48ae5b00d276d7d3fbf25d82b09b2dd1c6d944d80aa3df78ee64)
+        version: 8.1.6(patch_hash=21f476f8db1d90aaf33cedc1eac0cd7db920f0fa312365095a3409f0c5e2ae1b)
       sass:
         specifier: ^1.85.1
         version: 1.87.0
@@ -799,7 +799,7 @@ snapshots:
   is-number@7.0.0:
     optional: true
 
-  jsx-dom@8.1.6(patch_hash=3de3d718783f48ae5b00d276d7d3fbf25d82b09b2dd1c6d944d80aa3df78ee64):
+  jsx-dom@8.1.6(patch_hash=21f476f8db1d90aaf33cedc1eac0cd7db920f0fa312365095a3409f0c5e2ae1b):
     dependencies:
       csstype: 3.1.3
 

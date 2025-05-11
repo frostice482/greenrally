@@ -36,6 +36,8 @@ img, .noselect {
 .fill, .fill-x { width: 100%; }
 .fill, .fill-y { height: 100%; }
 
+.fill-2em { width: 2em; height: 2em; }
+
 .flex-row { display: flex; flex-direction: row; }
 .flex-col { display: flex; flex-direction: column; }
 .center {
