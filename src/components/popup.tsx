@@ -3,7 +3,7 @@ import { nodeState } from "lib/state"
 
 export default class Popup {
     constructor(children: ReactElement, opts: PopupOpts = {}) {
-        const node = <div class="popup">{this.children(children)}</div>
+        const node = <div class="popup">{this.children(children)}</div> as HTMLElement
         this.node = node
 
         this.clickOutHide = opts.clickOutHide ?? true
@@ -44,7 +44,7 @@ export default class Popup {
     get shown() { return Boolean(this._abort && !this._abort.signal.aborted) }
 
     children = nodeState()
-    node: ReactElement
+    node: HTMLElement
 
     show() {
         if (this.shown) return

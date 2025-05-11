@@ -1,8 +1,8 @@
 import BComp from "./bcomp";
 import { Tag } from "./util";
 
-export default class Rally extends BComp<RallyOpts> {
-    constructor(param: RallyOpts) {
+export default class Rally<T extends RallyOpts = RallyOpts> extends BComp<T> {
+    constructor(param: T) {
         super(param)
         this.detail = this.makeDetail()
         this.summary = this.makeSummary()

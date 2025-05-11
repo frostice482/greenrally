@@ -2,17 +2,25 @@
 @use "util.scss";
 @use "rally.scss";
 
+$col-background: #F7F6F1;
+$col-header: #D7E1C8;
+$col-greendark: #285D00;
+$col-greenlight: #C4DBA0;
+$col-accent: #E8D7C7;
+$col-weakdarktr: #0003;
+$col-darktr: #0003;
+
 body {
     margin: 0;
     font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    background: #F7F6F1;
+    background: $col-background;
     font-size: 16px;
 }
 
 header {
     height: 3em;
     padding: 8px 16px;
-    background: #D7E1C8;
+    background: $col-header;
 
     display: grid;
     grid-template-columns: 3fr 5fr 3fr;
@@ -45,17 +53,17 @@ button:disabled {
 #title {
     font-weight: 450;
     font-family: Merienda, 'Open Sans';
-    color: #285D00;
-    filter: drop-shadow(2px 3px 0px #0002);
+    color: $col-greendark;
+    filter: drop-shadow(2px 3px 0px $col-weakdarktr);
 }
 
-#search > div {
+#search {
     height: 100%;
     padding: 6px 12px;
     box-sizing: border-box;
 
-    background: #E8D7C7;
-    border: 1px solid #285D00;
+    background: $col-accent;
+    border: 1px solid $col-greendark;
     border-radius: 0.5em;
 
     display: flex;
@@ -63,12 +71,36 @@ button:disabled {
     gap: 8px;
 }
 
-.big-button {
-    padding: 8px 16px;
-    background: #C4DBA0;
-    border-radius: 1em;
+#search-res {
+    margin-top: 4px;
+    padding: 8px;
+    box-sizing: border-box;
+    background: white;
+    border: 1px solid;
+    border-radius: 0.5em;
+    gap: 8px;
 }
 
+.search-rally {
+    padding: 0;
+    border: 1px solid $col-greendark;
+    border-radius: 0.5em;
+
+    & > div {
+        padding: 4px 16px;
+        background: #fffb;
+
+        & > img {
+            margin-right: 8px;
+        }
+    }
+}
+
+.big-button {
+    padding: 8px 16px;
+    background: $col-greenlight;
+    border-radius: 1em;
+}
 
 .popup {
     width: 100%;
@@ -80,7 +112,7 @@ button:disabled {
 }
 
 .popup.blur {
-    background: #0007;
+    background: $col-darktr;
 }
 
 .login-container {
@@ -93,7 +125,7 @@ button:disabled {
     border: 1px solid #285D00;
     border-radius: 0.5em;
 
-    filter: drop-shadow(0px 2px 4px #0003);
+    filter: drop-shadow(0px 2px 4px $col-weakdarktr);
 
     & > button + * {
         margin-top: 8px;

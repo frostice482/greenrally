@@ -2,8 +2,8 @@ import { nodeState } from "lib/state";
 import BComp from "./bcomp";
 import searchUrl from "@/resources/search.svg?url"
 
-export default class Header extends BComp<HeaderOpts> {
-    constructor(props: HeaderOpts) {
+export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> {
+    constructor(props: T) {
         super(props)
         this.beforeRender()
         this.search = this.makeSearch()
@@ -17,7 +17,7 @@ export default class Header extends BComp<HeaderOpts> {
         type="search"
         class="fill reset"
     /> as HTMLInputElement
-    searchBtn = <button id="searchbtn" class="reset">
+    searchBtn = <button id="searchbtn" class="reset flex-row">
         <img src={searchUrl} style={{height: "1em"}}/>
     </button>
 
@@ -26,17 +26,15 @@ export default class Header extends BComp<HeaderOpts> {
 
     protected makeSearch() {
         return <div id="search">
-            <div>
-                {this.searchInput}
-                {this.searchBtn}
-            </div>
+            {this.searchInput}
+            {this.searchBtn}
         </div>
     }
 
     protected makeNode() {
         return <header>
             <h2 id="title">GreenRally</h2>
-            {this.search}
+            <div>{this.search}</div>
             {this.account()}
         </header>
     }

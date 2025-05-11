@@ -1,5 +1,9 @@
 @use "util-mixin.scss" as mixin;
 
+[hidden] {
+	display: none !important;
+}
+
 .reset, .resetfont {
 	font-weight: unset;
 	font-family: unset;
@@ -27,6 +31,9 @@ img, .noselect {
 	pointer-events: none;
 }
 
+.relative { position: relative; }
+.absolute { position: absolute; }
+
 .margin { margin: 8px; }
 .pad { padding: 8px; }
 
@@ -35,8 +42,12 @@ img, .noselect {
 
 .fill, .fill-x { width: 100%; }
 .fill, .fill-y { height: 100%; }
-
 .fill-2em { width: 2em; height: 2em; }
+
+.bg-cover {
+	background-size: cover;
+	background-position: center;
+}
 
 .flex-row { display: flex; flex-direction: row; }
 .flex-col { display: flex; flex-direction: column; }

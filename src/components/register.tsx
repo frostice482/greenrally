@@ -1,8 +1,8 @@
 import Login, { LoginOpts } from "./login"
 import UInput from "./uinput"
 
-export default class Register extends Login {
-    constructor(props: LoginOpts) {
+export default class Register<T extends LoginOpts = LoginOpts> extends Login<T> {
+    constructor(props: T) {
         super(props)
     }
 

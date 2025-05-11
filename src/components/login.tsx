@@ -2,8 +2,8 @@ import BComp from "./bcomp"
 import UInput from "./uinput"
 import { StateButton } from "./util"
 
-export default class Login extends BComp<LoginOpts> {
-    constructor(props: LoginOpts) {
+export default class Login<T extends LoginOpts = LoginOpts> extends BComp<T> {
+    constructor(props: T) {
         super(props)
         this.beforeRender()
         this.container = this.makeContainer()

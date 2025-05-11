@@ -3,8 +3,8 @@ import BComp from "./bcomp"
 import Rally from "./rally"
 import { Tag } from "./util"
 
-export default class RallyList extends BComp<RallyListOpts> {
-    constructor(opts: RallyListOpts) {
+export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends BComp<T> {
+    constructor(opts: T) {
         super(opts)
 
         this.beforeRender()

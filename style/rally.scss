@@ -1,12 +1,11 @@
-
 .rally-list {
     display: grid;
     padding: 0 8px;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
 }
+
 .rally {
-    width: 33vw;
     height: 300px;
 
     background-position: center;
