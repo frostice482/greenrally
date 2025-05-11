@@ -1,10 +1,11 @@
 import { nodeState } from "lib/state";
 import searchUrl from "@/resources/search.svg?url"
-import { Component, ReactElement } from "jsx-dom";
+import BComp from "./bcomp";
 
-export default class CHeader extends Component {
-    constructor(props: {}) {
+export default class Header extends BComp<CHeaderOpts> {
+    constructor(props: CHeaderOpts) {
         super(props)
+        this.beforeRender()
         this.search = this.makeSearch()
         this.node = this.makeNode()
     }
@@ -13,7 +14,7 @@ export default class CHeader extends Component {
     searchInput = <input
         id="searchinput"
         placeholder="Find a rally"
-        type="text"
+        type="search"
         class="fill reset"
     />
     searchBtn = <button id="searchbtn" class="reset">
@@ -33,7 +34,7 @@ export default class CHeader extends Component {
     }
 
     protected makeNode() {
-        return <header>
+        return <header {...this.props}>
             <h2 id="title">GreenRally</h2>
             {this.search}
             {this.account()}
@@ -44,3 +45,5 @@ export default class CHeader extends Component {
         return this.node
     }
 }
+
+export interface CHeaderOpts extends E.header {}

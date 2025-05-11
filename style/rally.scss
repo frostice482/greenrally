@@ -1,0 +1,59 @@
+
+.rally-list {
+    display: grid;
+    padding: 0 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.rally {
+    width: 33vw;
+    height: 300px;
+
+    background-position: center;
+    background-size: cover;
+
+    border: 2px solid #285D00;
+    border-radius: 0.4em;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    & > div {
+        padding: 8px;
+        background: #0006;
+    }
+
+    &:hover {
+        border-color: #079;
+    }
+
+    &:hover > div {
+        height: 100%;
+        background: #0009;
+    }
+
+    &:not(:hover) .rally-detail {
+        display: none;
+    }
+}
+
+.rally-detail > :first-child {
+    flex-grow: 1;
+}
+
+.rally-info {
+    background: #886341;
+    border-radius: 0.3em;
+    color: white;
+    --hover-color: #51a2bb;
+}
+
+.rally-tag {
+    margin: 0 2px;
+    background: #886341;
+    border-radius: 0.3em;
+    color: white;
+    --hover-color: #89a144;
+}

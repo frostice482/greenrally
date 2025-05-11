@@ -1,7 +1,7 @@
-import { Component, ReactElement } from "jsx-dom";
-import Tag from "./tag";
+import { Tag } from "./util";
+import BComp from "./bcomp";
 
-export default class CRally extends Component<CRallyOpts> {
+export default class Rally extends BComp<CRallyOpts> {
     constructor(param: CRallyOpts) {
         super(param)
         this.detail = this.makeDetail()

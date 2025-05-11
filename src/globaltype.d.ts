@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTML } from "jsx-dom"
+import { DetailedHTMLProps, HTML, JSX } from "jsx-dom"
 
 declare module 'jsx-dom' {
 	interface CSSProperties {
@@ -27,5 +27,14 @@ declare global {
 
 	interface Node {
 		cloneNode(deep?: boolean): this
+	}
+
+	namespace E {
+		type div = JSX.IntrinsicElements['div']
+		type header = JSX.IntrinsicElements['header']
+		type span = JSX.IntrinsicElements['span']
+		type input = JSX.IntrinsicElements['input']
+		type button = JSX.IntrinsicElements['button']
+		type form = JSX.IntrinsicElements['form']
 	}
 }

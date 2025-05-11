@@ -1,35 +1,21 @@
-import CRally from "components/rally";
-import Tag from "components/tag";
-import { Component, ReactElement } from "jsx-dom";
+import Rally from "components/rally";
+import { Tag } from "components/util";
+import BComp from "./bcomp";
+import { ReactElement } from "jsx-dom";
 
-export default class PList extends Component<PListOpts> {
-    constructor(opts: PListOpts) {
+export default class RallyList extends BComp<RallyListOpts> {
+    constructor(opts: RallyListOpts) {
         super(opts)
-        const onRallyInfo = this.props.onRallyInfoClick
 
-        for (const rally of opts.rallies) {
-            this.rallies.set(rally, <CRally
-                rally={rally}
-                onInfoClick={onRallyInfo}
-                onTagClick={tag => this.handleTagSelect(tag, true)}
-            />)
-
-            for (const tag of rally.tags) {
-                let set = this.ralliesByTags.get(tag)
-                if (!set) this.ralliesByTags.set(tag, set = new Set)
-                set.add(rally)
-            }
-        }
-
+        this.beforeRender()
         this.list = this.makeList()
-        this.tagHeaders = new Map(this.makeTagHeaders())
+        this.updateList(opts.rallies)
         this.node = this.makeNode()
-        this.resetList()
     }
 
     rallies = new Map<Data.Rally, ReactElement>
-    ralliesByTags = new Map<string, Set<Data.Rally>>()
-    tagHeaders:  Map<string, ReactElement>
+    declare ralliesByTags: Map<string, Set<Data.Rally>>
+    declare tagHeaders: Map<string, ReactElement>
     selectedTag?: string
 
     list
@@ -47,6 +33,30 @@ export default class PList extends Component<PListOpts> {
             this.selectedTag = tag
             this.tagHeaders.get(tag)?.classList.add("focus")
         }
+        this.resetList()
+    }
+
+    protected updateList(rallies: Iterable<Data.Rally>) {
+        const oldRallies = this.rallies
+        this.rallies = new Map
+        this.ralliesByTags = new Map
+
+        const onRallyInfo = this.props.onRallyInfoClick
+        for (const rally of rallies) {
+            this.rallies.set(rally, oldRallies.get(rally) ?? <Rally
+                rally={rally}
+                onInfoClick={onRallyInfo}
+                onTagClick={tag => this.handleTagSelect(tag, true)}
+            />)
+
+            for (const tag of rally.tags) {
+                let set = this.ralliesByTags.get(tag)
+                if (!set) this.ralliesByTags.set(tag, set = new Set)
+                set.add(rally)
+            }
+        }
+
+        this.tagHeaders = new Map(this.makeTagHeaders())
         this.resetList()
     }
 
@@ -68,11 +78,11 @@ export default class PList extends Component<PListOpts> {
     }
 
     protected makeList() {
-        return <div class="p-home-list"></div>
+        return <div class="rally-list"></div>
     }
 
     protected makeNode() {
-        return <div class="p-home">
+        return <div {...this.props} {...{ rallies: null, onRallyInfoClick: null }}>
             <div class="margin">
                 {Array.from(this.tagHeaders.values())}
             </div>
@@ -86,7 +96,7 @@ export default class PList extends Component<PListOpts> {
     }
 }
 
-export interface PListOpts {
+export interface RallyListOpts extends E.div {
     rallies: Iterable<Data.Rally>
     onRallyInfoClick?: () => void
 }
