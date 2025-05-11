@@ -1,7 +1,7 @@
-import Rally from "components/rally";
-import { Tag } from "components/util";
-import BComp from "./bcomp";
-import { ReactElement } from "jsx-dom";
+import { ReactElement } from "jsx-dom"
+import BComp from "./bcomp"
+import Rally from "./rally"
+import { Tag } from "./util"
 
 export default class RallyList extends BComp<RallyListOpts> {
     constructor(opts: RallyListOpts) {

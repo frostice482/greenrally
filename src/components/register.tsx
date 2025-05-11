@@ -1,5 +1,5 @@
-import Login, { LoginOpts } from "./login";
-import UInput from "./uinput";
+import Login, { LoginOpts } from "./login"
+import UInput from "./uinput"
 
 export default class Register extends Login {
     constructor(props: LoginOpts) {
@@ -14,7 +14,7 @@ export default class Register extends Login {
         this.text = "Register"
         this.nameInput = new UInput(<input required id="username" type="search"/>, "Username")
         this.confirmPasswordInput = new UInput(<input required id="passwordConfirm" type="password"/>, "Confirm password")
-        this.fields = [this.emailInput, this.nameInput, this.passwordInput, this.confirmPasswordInput]
+        this.fields = [this.nameInput, this.emailInput, this.passwordInput, this.confirmPasswordInput]
     }
 
     protected makeFooter() {

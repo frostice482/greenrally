@@ -1,10 +1,8 @@
 import { ReactElement } from "jsx-dom"
 import { nodeState } from "lib/state"
-import TypedEventTarget from "lib/typedevt"
 
-export default class Popup extends TypedEventTarget<{  }> {
+export default class Popup {
     constructor(children: ReactElement, opts: PopupOpts = {}) {
-        super()
         const node = <div class="popup">{this.children(children)}</div>
         this.node = node
 

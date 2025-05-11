@@ -15,63 +15,6 @@ export function valueState<T, S = T>(value: T, change = (next: S, prev: T): T =>
 }
 
 /**
- * get/set variable for input nodes
- * @param value Initial value
- * @param change Function to call when value has been changed
- */
-export function inputState<T extends InputValues>(value: T, change?: (next: T, prev: T) => T) {
-	const state = valueState(value, change) as InputState<T>
-	state.input = (ev) => {
-		let newValue
-		const input = ev.currentTarget
-		if (input instanceof HTMLInputElement) switch (input.type) {
-			// bool
-			case 'checkbox':
-			case 'radio':
-				newValue = input.checked
-			break
-
-			// date
-			case 'date':
-			case 'datetime-local':
-				newValue = input.valueAsDate ?? new Date(NaN)
-			break
-
-			// file
-			case 'file':
-				newValue = input.files ?? new FileList()
-			break
-
-			// number
-			case 'number':
-			case 'range':
-			case 'time':
-				newValue = input.valueAsNumber
-			break
-		}
-
-		newValue ??= input.value
-
-		if (value?.constructor !== newValue?.constructor) {
-			switch (typeof value) {
-				case 'string': newValue = String(newValue); break
-				case 'number': newValue = Number(newValue); break
-				case 'boolean': newValue = Boolean(newValue); break
-
-				default: {
-					if (value instanceof Date) {
-						newValue = new Date(Number(newValue))
-					}
-				}
-			}
-		}
-
-		return state(newValue as never)
-	}
-	return state
-}
-
-/**
  * Node get/set variable in function form,
  * which replaces old node with new node when value changes
  * @param value Initial node

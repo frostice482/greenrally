@@ -1,27 +1,6 @@
+import { createProxyURLSearchObj } from "./util"
+
 export class URLLoader {
-	static createProxyURLSearchObj(search: URLSearchParams): Record<string, string> {
-		return new Proxy({}, {
-			get(t, p) {
-				if (typeof p === 'string') return search.get(p) ?? undefined
-			},
-			set(t, p, v) {
-				if (typeof p !== 'string') return true
-
-				if (v == undefined) search.delete(p)
-				else search.set(p, v)
-
-				return true
-			},
-			deleteProperty(t, p) {
-				if (typeof p === 'string') search.delete(p)
-				return true
-			},
-			has(t, p) {
-				return typeof p === 'string' && search.has(p)
-			}
-		})
-	}
-
 	paths = new Map<string, Configuration>()
 	regexs = new Map<RegExp, Configuration>()
 
@@ -63,13 +42,33 @@ export class URLLoader {
 		for (const p of conf.requiredParams)
 			if (!search.has(p)) return false
 
-		conf.fn(URLLoader.createProxyURLSearchObj(search))
+		conf.fn(createProxyURLSearchObj(search))
 		return true
+	}
+}
+
+export class URLLoaderDefaultState<R extends string> {
+	constructor(ref: URLLoaderDefault, conf: ConfigurationString) {
+		this.ref = ref
+		this.config = conf
+	}
+
+	ref: URLLoaderDefault
+	config: ConfigurationString
+
+	push(args?: Record<R, string> | Record<string, string>, push = true) {
+		this.ref.pushState(this.config.path, args, push)
 	}
 }
 
 export class URLLoaderDefault extends URLLoader {
 	shouldPush = false
+
+	addState<R extends string>(path: string, requiredParams: readonly R[], fn: Fn<R>) {
+		const confStr: ConfigurationString = { path, requiredParams, fn }
+		this.addConfig(confStr)
+		return new URLLoaderDefaultState<R>(this, confStr)
+	}
 
 	/**
 	 * Pushes URL state
@@ -101,6 +100,10 @@ interface Configuration {
 	path: string | RegExp
 	requiredParams: readonly string[]
 	fn: Fn
+}
+
+interface ConfigurationString extends Configuration {
+	path: string
 }
 
 type Fn<R extends string = never> = (obj: Record<string, string> & Record<R, string>) => void

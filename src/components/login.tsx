@@ -1,6 +1,6 @@
-import UInput from "./uinput";
-import { StateButton } from "./util";
-import BComp from "./bcomp";
+import BComp from "./bcomp"
+import UInput from "./uinput"
+import { StateButton } from "./util"
 
 export default class Login extends BComp<LoginOpts> {
     constructor(props: LoginOpts) {

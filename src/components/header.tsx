@@ -1,6 +1,6 @@
 import { nodeState } from "lib/state";
-import searchUrl from "@/resources/search.svg?url"
 import BComp from "./bcomp";
+import searchUrl from "@/resources/search.svg?url"
 
 export default class Header extends BComp<CHeaderOpts> {
     constructor(props: CHeaderOpts) {

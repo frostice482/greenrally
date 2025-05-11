@@ -1,5 +1,5 @@
-import { Tag } from "./util";
 import BComp from "./bcomp";
+import { Tag } from "./util";
 
 export default class Rally extends BComp<CRallyOpts> {
     constructor(param: CRallyOpts) {
