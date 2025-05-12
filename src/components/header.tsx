@@ -38,10 +38,6 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
             {this.account()}
         </header>
     }
-
-    render() {
-        return this.node
-    }
 }
 
 export interface HeaderOpts {}

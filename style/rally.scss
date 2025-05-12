@@ -38,7 +38,7 @@
     }
 }
 
-.rally-detail > :first-child {
+.rally-summary > :first-child {
     flex-grow: 1;
 }
 
@@ -54,5 +54,19 @@
     border-radius: 0.3em;
     color: white;
 
-    &.focus { background: #89a144; }
+    &:is(:hover, .focus) { background: #89a144; }
+}
+
+.rally-detail {
+    padding: 0 0 16px 0 !important;
+    width: 800px;
+    max-width: 80%;
+}
+
+.rally-ttag {
+    margin: 0 4px;
+    padding: 1px 4px;
+    border-radius: 0.25em;
+    &-not { background: #777; color: white; }
+    &-current { background: lime }
 }

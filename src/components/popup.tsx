@@ -11,6 +11,7 @@ export default class Popup {
         this.clickFocus = opts.clickFocus ?? true
 
         if (opts.blur) node.classList.add("blur")
+        if (opts.center) node.classList.add("center")
         if (!opts.blockBackground) node.classList.add("ghostlayer")
 
         children.addEventListener("click", () => this.handleOnClick())
@@ -70,4 +71,5 @@ export interface PopupOpts {
     clickFocus?: boolean // true
     blur?: boolean // false
     blockBackground?: boolean // false
+    center?: boolean // false
 }

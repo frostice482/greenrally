@@ -17,7 +17,7 @@ export default class Rally<T extends RallyOpts = RallyOpts> extends BComp<T> {
 
     protected makeDetail() {
         const rally = this.props.rally
-        return <div class="rally-detail flex-col noflow fill-y">
+        return <div class="rally-summary flex-col noflow fill-y">
             <div style={{overflow: 'auto'}}>{rally.description}</div>
             <div class="flex-row justify-between margin-top">
                 <small>Tags: {rally.tags.map(v => <Tag name={v} onClick={() => this.props.onTagClick?.(v)}/>)}</small>
@@ -44,9 +44,6 @@ export default class Rally<T extends RallyOpts = RallyOpts> extends BComp<T> {
         return n
     }
 
-    render() {
-        return this.node
-    }
 }
 
 export interface RallyOpts {

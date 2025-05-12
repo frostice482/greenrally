@@ -27,7 +27,7 @@ export default class Login<T extends LoginOpts = LoginOpts> extends BComp<T> {
     }
 
     protected makeContainer() {
-        return <div class="login-container flex-col align-center">
+        return <div class="login-container flex-col align-center container">
             <h2>{this.text}</h2>
             {this.fields.map(v => v.render())}
             <StateButton class="big-button" cOnClick={ev => this.onLogin(ev)}><h3>{this.text}</h3></StateButton>
@@ -47,10 +47,6 @@ export default class Login<T extends LoginOpts = LoginOpts> extends BComp<T> {
     protected onLogin(ev: Event) {
         ev.preventDefault()
         this.props.onLogin?.(this, this.emailInput.input.value, this.passwordInput.input.value)
-    }
-
-    render() {
-        return this.node
     }
 }
 

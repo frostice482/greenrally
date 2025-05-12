@@ -1,4 +1,6 @@
 import RallyList from "components/list"
+import Popup from "components/popup"
+import RallyInfo from "components/rallyinfo"
 import SHeader from "components/super/header"
 import data from "defaultdata"
 
@@ -7,4 +9,9 @@ document.head.append(
 )
 
 document.body.append(<SHeader rallies={Array.from(data.rallies.values())} onRallyClick={console.log}/>)
-document.body.append(<RallyList rallies={data.rallies.values()}/>)
+
+const popup = new Popup(<RallyInfo rally={data.rallies.values().next().value}/>, { blur: true, center: true })
+popup.show()
+
+document.body.append(popup.node)
+

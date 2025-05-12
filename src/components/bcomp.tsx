@@ -7,5 +7,7 @@ export default abstract class BComp<T = {}> extends Component<T> {
 
     protected abstract makeNode(): ReactElement
 
-    abstract render(): ReactElement
+    render() {
+        return this.node
+    }
 }

@@ -89,11 +89,6 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
             {this.list}
         </div>
     }
-
-    render() {
-        console.log(this)
-        return this.node
-    }
 }
 
 export interface RallyListOpts {

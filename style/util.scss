@@ -20,7 +20,7 @@
 }
 
 .ghostlayer { pointer-events: none; }
-.ghostlayer > * { pointer-events: unset; }
+.ghostlayer > * { pointer-events: initial; }
 
 input[type="text"].reset {
 	height: 1.4em;
