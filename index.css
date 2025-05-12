@@ -37,6 +37,7 @@ body {
 	flex-direction: row-reverse;
 }
 .title {
+	margin-left: 16px;
 	font-family: "Instrument Sans", sans-serif;
 	font-weight: 400;
 	font-size: 30pt;
@@ -65,4 +66,28 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
 	text-decoration: none;
+	margin-right: 16px;
+}
+
+.pills-container {
+	margin: 8px 24px;
+}
+
+.pill {
+	border-radius: 10px;
+	padding: 4px 6px;
+	border-style: none;
+	background-color: #E7D7CB;
+	margin: 0px 4px;
+	transition: background-color 0.2s;
+}
+
+.pill:hover {
+	background-color: #F0E2D8;
+	transition: background-color 0.2s;
+}
+
+.toggled {
+	background-color: #F0E2D8 !important;
+	transition: background-color 0.2s;
 }
