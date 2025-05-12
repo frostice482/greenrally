@@ -235,3 +235,28 @@ body {
 	background-color: #c6db72;
 	transition: background-color 0.4s;
 }
+
+.message {
+	width: 100%;
+	z-index: 2;
+	pointer-events: none;
+	height: 10%;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	transition: opacity 0.4s;
+}
+
+.message-success {
+	pointer-events: auto !important;
+	background-color: #C4DBA0;
+}
+
+.message-text {
+	margin: auto;
+	font-family: "Inter", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	text-align: center;
+}
