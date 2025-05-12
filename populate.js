@@ -49,13 +49,10 @@ const data = [
 	},
 ]
 
-console.log(data);
 var filter = "";
 data.map(populate)
 
-console.log(document.getElementById('search'));
 document.getElementById('search').addEventListener('input', (e) => {
-	console.log(e);
 	filter = e.target.value;
 	repopulate();
 })
@@ -69,7 +66,6 @@ function repopulate(){
 	data.map(populate);
 }
 function populate(item){
-	console.log(item);
 	if(filter != ""){
 		if(!item.title.includes(filter)){
 			return;
