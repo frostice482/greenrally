@@ -218,4 +218,20 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
 	font-size: 16px;
+	overflow-y: scroll;
+}
+
+.modal-button {
+	position: absolute;
+	bottom: calc(15% + 20px);
+	right: calc(10% + 20px);
+	background-color: #A6B95B;
+	border-radius: 8px;
+	padding: 20px;
+	transition: background-color 0.4s;
+}
+
+.modal-button:hover {
+	background-color: #c6db72;
+	transition: background-color 0.4s;
 }
