@@ -3,9 +3,12 @@ body {
 	padding: 0;
 	margin: 0;
 }
-.navbar {
+.top {
 	position: sticky;
 	top: 0;
+	width: 100%;
+}
+.navbar {
 	width: 100%;
 	padding: 4px;
 	box-sizing: border-box;
