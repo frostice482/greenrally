@@ -13,6 +13,9 @@ for(i = 0; i < itemTitles.length; i++){
 	itemNames.push(itemTitles.item(i).innerHTML);
 }
 
+document.getElementById('modal').addEventListener('click', (e) => {
+	e.target.classList.remove('modal');
+})
 
 console.log(itemNames);
 
