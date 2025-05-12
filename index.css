@@ -106,12 +106,13 @@ body {
 }
 
 .item {
-	width: 33%;
+	width: calc(33% - 32px);
+	box-sizing: border-box;
 	height: 196px;
 	border-radius: 24px;
 	background-color: #FEFEFD;
 	padding: 12px;
-	margin: 8px 16px;
+	margin: 8px 8px;
 	box-shadow: 4px 4px 4px #00000020;
 }
 
