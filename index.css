@@ -11,6 +11,7 @@ body {
 .navbar {
 	width: 100%;
 	padding: 4px;
+	height: 5vh;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
@@ -40,7 +41,7 @@ body {
 	margin-left: 16px;
 	font-family: "Instrument Sans", sans-serif;
 	font-weight: 400;
-	font-size: 30pt;
+	font-size: 175%;
 	color: #285D00;
 	text-decoration: none;
 }
@@ -121,18 +122,25 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 600;
 	font-size: 24px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .item-tags{
 	font-family: "Inter", sans-serif;
 	margin-top: 4px;
 	font-weight: 400;
 	font-size: 16px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .item-description {
 	margin-top: 16px;
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
 	font-size: 16px;
+	text-overflow: ellipsis;
 }
 .modal-invisible {
 	visibility: hidden;

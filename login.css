@@ -14,6 +14,7 @@ body {
 }
 .navbar {
 	width: 100%;
+	height: 5vh;
 	padding: 4px;
 	box-sizing: border-box;
 	display: flex;
@@ -23,19 +24,21 @@ body {
 }
 
 .navbar-container {
-	border-color: #FF00FF;
 	display: flex;
 	align-items: center;
 	width: 33%;
+}
+.navbar-fill {
+	width: 100%;
 }
 
 .title {
 	margin-left: 16px;
 	font-family: "Instrument Sans", sans-serif;
 	font-weight: 400;
-	font-size: 30pt;
-	color: #285D00;
+	font-size: 175%;
 	text-decoration: none;
+	color: #285D00;
 }
 
 .content {
@@ -48,6 +51,7 @@ body {
 
 .login-container {
 	width: 35%;
+	min-width: 300px;
 	background-color: #FFFFFF;
 	box-shadow: 4px 4px 4px #00000020;
 	padding: 16px;
