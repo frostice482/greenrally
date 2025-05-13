@@ -26,6 +26,7 @@ function submit(){
 	const successInfo = document.getElementById('success-message');
 	successInfo.classList.add('success-shown');
 
+	localStorage.loggedIn = true;
 	setTimeout(function(){
 		window.location.href = "./index.html";
 	}, 3000);
