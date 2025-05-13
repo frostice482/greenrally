@@ -1,3 +1,5 @@
+@use "colors.scss" as col;
+
 .rally-list {
     display: grid;
     padding: 0 8px;
@@ -33,7 +35,7 @@
         background: #0009;
     }
 
-    &:not(:hover) .rally-detail {
+    &:not(:hover) .rally-summary {
         display: none;
     }
 }
@@ -42,25 +44,30 @@
     flex-grow: 1;
 }
 
-.rally-info {
-    background: #886341;
+.rally-button {
+    background: col.$bluelight;
     border-radius: 0.3em;
     color: white;
+
+    &:hover {
+        background: col.$green;
+    }
 }
 
 .rally-tag {
     margin: 0 2px;
-    background: #886341;
+    background: col.$wood;
     border-radius: 0.3em;
     color: white;
 
-    &:is(:hover, .focus) { background: #89a144; }
+    &:is(:hover, .focus) { background: col.$green; }
 }
 
 .rally-detail {
-    padding: 0 0 16px 0 !important;
     width: 800px;
     max-width: 80%;
+
+    background-size: auto, cover !important;
 }
 
 .rally-ttag {

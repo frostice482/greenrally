@@ -3,6 +3,7 @@ import { jsx } from "jsx-dom/jsx-runtime";
 import resizeListener from "lib/resizelis";
 import { refreshingTimeout } from "lib/util";
 import calendarUrl from "@/resources/calendar.svg?url"
+import Popup from "components/popup";
 
 export function SearchResultRally(opts: E.button & { rally: Data.Rally }) {
     const rally = opts.rally
@@ -41,11 +42,15 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
         }
 
         this.searchInput.addEventListener("focus", () => {
-            this.searchResult.hidden = false
+            this.searchPopup.lock = true
+            this.searchPopup.show()
         })
         this.searchInput.addEventListener("blur", () => {
-            this.searchResult.hidden = true
+            this.searchPopup.lock = false
+            if (!this.searchPopup.hovered) this.searchPopup.hide()
         })
+
+        // handle resize on search input
         resizeListener.listen(this.searchInput, () => this.realignSearchResult())
     }
 
@@ -59,22 +64,24 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
     searchTagValue = 40
 
     declare searchResult: HTMLElement
+    declare searchPopup: Popup
 
     protected beforeRender() {
-        super.beforeRender()
         this.searchResult = this.makeSearchResult()
+        this.searchPopup = new Popup(this.searchResult, {})
         this.resetSearch()
+        super.beforeRender()
     }
 
     protected makeSearchResult() {
-        return <div id="search-res" class="absolute flex-col" hidden/> as HTMLElement
+        return <div id="search-res" class="absolute flex-col"/> as HTMLElement
     }
 
     protected makeSearch() {
         return <div id="search">
             {this.searchInput}
             {this.searchBtn}
-            {this.searchResult}
+            {this.searchPopup.node}
         </div>
     }
 

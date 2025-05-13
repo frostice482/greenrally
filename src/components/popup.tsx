@@ -3,7 +3,7 @@ import { nodeState } from "lib/state"
 
 export default class Popup {
     constructor(children: ReactElement, opts: PopupOpts = {}) {
-        const node = <div class="popup">{this.children(children)}</div> as HTMLElement
+        const node = <div class="popup" hidden>{this.children(children)}</div> as HTMLElement
         this.node = node
 
         this.clickOutHide = opts.clickOutHide ?? true
@@ -15,7 +15,8 @@ export default class Popup {
         if (!opts.blockBackground) node.classList.add("ghostlayer")
 
         children.addEventListener("click", () => this.handleOnClick())
-        children.addEventListener("click", () => this.handleOnHoverOut())
+        children.addEventListener("pointerenter", () => this.handleOnHoverIn())
+        children.addEventListener("pointerleave", () => this.handleOnHoverOut())
     }
 
     protected handleOnClick() {
@@ -30,7 +31,12 @@ export default class Popup {
             this.hide()
     }
 
+    protected handleOnHoverIn() {
+        this._hovered = true
+    }
+
     protected handleOnHoverOut() {
+        this._hovered = false
         if (this.hoverOutHide && !this.clickFocus)
             this.hide()
     }
@@ -39,36 +45,43 @@ export default class Popup {
     hoverOutHide: boolean
     clickFocus: boolean
     focusCurrent = false
+    lock = false
 
+    protected _hovered = false
     protected _clicked = false
     protected _abort?: AbortController
     get shown() { return Boolean(this._abort && !this._abort.signal.aborted) }
+    get hovered() { return this._hovered }
 
     children = nodeState()
     node: HTMLElement
 
     show() {
-        if (this.shown) return
+        if (this.shown) return this.node
 
         this._abort = new AbortController
         const sig = this._abort.signal
 
         document.addEventListener("click", () => this.handleOnDocumentClick(), { signal: sig })
         this.node.hidden = false
+
+        return this.node
     }
 
-    hide() {
-        if (!this.shown) return
+    hide(ignoreLock = false) {
+        if (!this.shown || this.lock && !ignoreLock) return
 
         this._abort?.abort()
         this.node.hidden = true
     }
 }
 
-export interface PopupOpts {
+export interface PopupFocusOpts {
     clickOutHide?: boolean // true
     hoverOutHide?: boolean // false
     clickFocus?: boolean // true
+}
+export interface PopupOpts extends PopupFocusOpts {
     blur?: boolean // false
     blockBackground?: boolean // false
     center?: boolean // false

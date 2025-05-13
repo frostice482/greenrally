@@ -6,6 +6,7 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
     constructor(props: T) {
         super(props)
         this.beforeRender()
+        this.account(this.makeLogin())
         this.search = this.makeSearch()
         this.node = this.makeNode()
     }
@@ -24,6 +25,10 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
     search
     node
 
+    makeLogin() {
+        return <button id="button-login">Sign In</button>
+    }
+
     protected makeSearch() {
         return <div id="search">
             {this.searchInput}
@@ -40,4 +45,7 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
     }
 }
 
-export interface HeaderOpts {}
+export interface HeaderOpts {
+    onLogin?: () => void
+    onAccountDetail?: () => void
+}

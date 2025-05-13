@@ -21,7 +21,7 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
     list
     node
 
-    protected handleTagSelect(tag: string, fromRally = false) {
+    selectTag(tag: string, fromRally = false) {
         const old = this.selectedTag
         if (old == tag && fromRally) return
 
@@ -45,8 +45,8 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
         for (const rally of rallies) {
             this.rallies.set(rally, oldRallies.get(rally) ?? <Rally
                 rally={rally}
-                onInfoClick={onRallyInfo}
-                onTagClick={tag => this.handleTagSelect(tag, true)}
+                onInfoClick={() => onRallyInfo?.(rally)}
+                onTagClick={tag => this.selectTag(tag, true)}
             />)
 
             for (const tag of rally.tags) {
@@ -63,7 +63,7 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
     protected makeTagHeaders(): [string, ReactElement][] {
         return Array.from(this.ralliesByTags)
             .sort(({1: a}, {1: b}) => b.size - a.size)
-            .map(({0: tag}) => [tag, <Tag name={tag} onClick={() => this.handleTagSelect(tag)}/>])
+            .map(({0: tag}) => [tag, <Tag name={tag} onClick={() => this.selectTag(tag)}/>])
     }
 
     protected resetList() {
@@ -93,5 +93,5 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
 
 export interface RallyListOpts {
     rallies: Iterable<Data.Rally>
-    onRallyInfoClick?: () => void
+    onRallyInfoClick?: (rally: Data.Rally) => void
 }

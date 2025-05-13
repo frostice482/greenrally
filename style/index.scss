@@ -1,27 +1,19 @@
 @use "util-mixin.scss" as mixin;
+@use "colors.scss" as col;
 @use "util.scss";
 @use "rally.scss";
-
-$col-background: #F7F6F1;
-$col-header: #D7E1C8;
-$col-bluedark: #00335d;
-$col-greendark: #285D00;
-$col-greenlight: #C4DBA0;
-$col-accent: #E8D7C7;
-$col-weakdarktr: #0003;
-$col-darktr: #0003;
 
 body {
     margin: 0;
     font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    background: $col-background;
+    background: col.$background;
     font-size: 16px;
 }
 
 header {
     height: 3em;
     padding: 8px 16px;
-    background: $col-header;
+    background: col.$header;
 
     display: grid;
     grid-template-columns: 3fr 5fr 3fr;
@@ -29,6 +21,10 @@ header {
     align-items: center;
 
     flex-shrink: 0;
+
+    & > :nth-child(3) {
+        justify-self: right;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -54,8 +50,20 @@ button:disabled {
 #title {
     font-weight: 450;
     font-family: Merienda, 'Open Sans';
-    color: $col-greendark;
-    filter: drop-shadow(2px 3px 0px $col-weakdarktr);
+    color: col.$greendark;
+    filter: drop-shadow(2px 3px 0px col.$weakdarktr);
+}
+
+#button-login {
+    padding: 6px 12px;
+    background: col.$greenkindadark;
+    border-radius: 0.5em;
+    color: white;
+    font-size: 1.2em;
+
+    &:hover {
+        background: col.$green;
+    }
 }
 
 #search {
@@ -63,8 +71,8 @@ button:disabled {
     padding: 6px 12px;
     box-sizing: border-box;
 
-    background: $col-accent;
-    border: 1px solid $col-greendark;
+    background: col.$accent;
+    border: 1px solid col.$greendark;
     border-radius: 0.5em;
 
     display: flex;
@@ -72,7 +80,7 @@ button:disabled {
     gap: 8px;
 
     &.focus {
-        border-color: $col-bluedark;
+        border-color: col.$bluedark;
     }
 }
 
@@ -88,7 +96,7 @@ button:disabled {
 
 .search-rally {
     padding: 0;
-    border: 1px solid $col-greendark;
+    border: 1px solid col.$greendark;
     border-radius: 0.5em;
 
     & > div {
@@ -99,7 +107,7 @@ button:disabled {
 
 .big-button {
     padding: 8px 16px;
-    background: $col-greenlight;
+    background: col.$greenlight;
     border-radius: 1em;
 }
 
@@ -113,7 +121,7 @@ button:disabled {
 }
 
 .popup.blur {
-    background: $col-darktr;
+    background: col.$darktr;
 }
 
 .uinput {
@@ -142,7 +150,7 @@ button:disabled {
     width: 350px;
     min-height: 300px;
 
-    filter: drop-shadow(0px 2px 4px $col-weakdarktr);
+    filter: drop-shadow(0px 2px 4px col.$weakdarktr);
 
     & > button + * {
         margin-top: 8px;

@@ -35,7 +35,8 @@ img, .noselect {
 .absolute { position: absolute; }
 
 .margin { margin: 8px; }
-.pad { padding: 8px; }
+.margin-top { margin-top: 8px; }
+.padding { padding: 8px; }
 
 .flow { overflow: auto; }
 .noflow { overflow: hidden; }
@@ -65,24 +66,50 @@ img, .noselect {
 
 .noshrink { flex-shrink: 0 }
 
-.bigside-top {
+.bigside {
 	@include mixin.grid-child(a, b, c);
-	grid-template-areas: 'a a' 'b c';
+}
+
+.bigside-top {
+	@extend .bigside;
+	grid-template-rows: 1fr auto;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'a a a'
+		'b . c'
+	;
 }
 
 .bigside-left {
-	@include mixin.grid-child(a, b, c);
-	grid-template-areas: 'a b' 'a c';
+	@extend .bigside;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 1fr auto;
+	grid-template-areas:
+		'a b'
+		'a .'
+		'a c'
+	;
 }
 
 .bigside-bottom {
-	@include mixin.grid-child(a, b, c);
-	grid-template-areas: 'a b' 'c c';
+	@extend .bigside;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'a . b'
+		'c c c'
+	;
 }
 
 .bigside-right {
-	@include mixin.grid-child(a, b, c);
-	grid-template-areas: 'a c' 'b c';
+	@extend .bigside;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		'a c'
+		'. c'
+		'b c'
+	;
 }
 
 .linelimit {
