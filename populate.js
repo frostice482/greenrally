@@ -55,6 +55,7 @@ data.map(populate)
 document.getElementById('search').addEventListener('input', (e) => {
 	filter = e.target.value;
 	repopulate();
+	attachItems();
 })
 
 function repopulate(){
@@ -67,14 +68,16 @@ function repopulate(){
 }
 function populate(item){
 	if(filter != ""){
-		if(!item.title.includes(filter)){
+		if(!item.title.toLowerCase().includes(filter.toLowerCase())){
 			return;
 		}
 	}
 	const content = document.getElementById('content');
 	let taglist = "";
 	for(i = 0; i < item.tags.length; i++){
-		taglist += item.tags[i] + ", ";
+		if(i == item.tags.length - 1){
+			taglist += item.tags[i];
+		} else taglist += item.tags[i] + ", ";
 	}
 	let row = document.getElementsByClassName('item-row');
 	let lastRow = row.item(row.length - 1);

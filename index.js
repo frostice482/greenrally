@@ -1,5 +1,5 @@
 let pills = document.getElementsByClassName('pill');
-let items = document.getElementsByClassName('item');
+var items = document.getElementsByClassName('item');
 let itemTitles = document.getElementsByClassName('item-title')
 let itemNames = [];
 
@@ -43,3 +43,9 @@ document.getElementById('modal-button').addEventListener('click', (e) => {
 		});
 	}
 
+	function attachItems(){
+		items = document.getElementsByClassName('item');
+		for(i = 0; i < items.length; i++){
+			attachItem(items.item(i));
+		}
+	}
