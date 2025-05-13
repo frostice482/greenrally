@@ -50,6 +50,8 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
             if (!this.searchPopup.hovered) this.searchPopup.hide()
         })
 
+        this.setAccount(this.props.account)
+
         // handle resize on search input
         resizeListener.listen(this.searchInput, () => this.realignSearchResult())
     }
@@ -74,7 +76,7 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
     }
 
     protected makeSearchResult() {
-        return <div id="search-res" class="absolute flex-col"/> as HTMLElement
+        return <div id="search-res" class="absolute"/> as HTMLElement
     }
 
     protected makeSearch() {
@@ -191,4 +193,5 @@ export default class SHeader<T extends SHeaderOpts = SHeaderOpts> extends Header
 export interface SHeaderOpts extends HeaderOpts {
     rallies: Data.Rally[]
     onRallyClick?: (data: Data.Rally) => void
+    account?: Data.User
 }

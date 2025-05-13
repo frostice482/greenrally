@@ -6,12 +6,9 @@ export default class IData {
 
     currentLogin?: Data.User
 
-    minPasswordLength = 6
-
     register(name: string, email: string, password: string) {
         if (this.userByNames.has(name)) return "name.exists"
         if (this.userByEmails.has(email)) return "email.exists"
-        if (password.length < this.minPasswordLength) return "password.tooshort"
 
         const user: Data.User = {
             id: Math.random() + '',
@@ -44,7 +41,7 @@ export default class IData {
         if (!userData || userData.password !== password) return "password.invalid"
         this.currentLogin = userData
 
-        return true
+        return userData
     }
 
     addUser(user: Data.User) {
@@ -89,11 +86,11 @@ export default class IData {
         return true
     }
 
-    save(where: Storage = localStorage, name = "data") {
+    save(where: Storage = sessionStorage, name = "data") {
         where.setItem(name, JSON.stringify(this.toJSON()))
     }
 
-    load(where: Storage = localStorage, name = "data") {
+    load(where: Storage = sessionStorage, name = "data") {
         const data = where.getItem(name)
         if (!data) return
         this.loadJSON(JSON.parse(data))
@@ -113,6 +110,8 @@ export default class IData {
             rally.author = this.users.get(rally.author)
             rally.participants = rally.participants.map((participantId: string) => this.users.get(participantId))
         }
+
+        for (const user of this.users.values()) this.addUser(user)
     }
 
     toJSON(): Data.RootJson {

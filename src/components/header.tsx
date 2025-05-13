@@ -6,12 +6,12 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
     constructor(props: T) {
         super(props)
         this.beforeRender()
-        this.account(this.makeLogin())
+        this.accountNode(this.makeLogin())
         this.search = this.makeSearch()
         this.node = this.makeNode()
     }
 
-    account = nodeState()
+    accountNode = nodeState()
     searchInput = <input
         id="searchinput"
         placeholder="Find a rally"
@@ -24,9 +24,23 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
 
     search
     node
+    protected _account?: Data.User
+    get account() { return this._account }
 
-    makeLogin() {
-        return <button id="button-login">Sign In</button>
+    setAccount(account?: Data.User) {
+        this._account = account
+        this.accountNode(account ? this.makeAccountDetail(account) : this.makeLogin())
+    }
+
+    protected makeLogin() {
+        return <button id="button-login" onClick={this.props.onLogin}>Sign In</button>
+    }
+
+    protected makeAccountDetail(account: Data.User) {
+        return <button class="flex-row align-center" onClick={this.props.onAccountDetail}>
+            {account.name}
+            <img src={account.profileLink} class="fill-2em round"/>
+        </button>
     }
 
     protected makeSearch() {
@@ -38,9 +52,11 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
 
     protected makeNode() {
         return <header>
-            <h2 id="title">GreenRally</h2>
+            <button id="title" onClick={this.props.onHome}>
+                <h2>GreenRally</h2>
+            </button>
             <div>{this.search}</div>
-            {this.account()}
+            {this.accountNode()}
         </header>
     }
 }
@@ -48,4 +64,5 @@ export default class Header<T extends HeaderOpts = HeaderOpts> extends BComp<T> 
 export interface HeaderOpts {
     onLogin?: () => void
     onAccountDetail?: () => void
+    onHome?: () => void
 }

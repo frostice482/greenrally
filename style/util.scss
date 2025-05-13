@@ -22,6 +22,8 @@
 .ghostlayer { pointer-events: none; }
 .ghostlayer > * { pointer-events: initial; }
 
+.round { border-radius: 50%; }
+
 input[type="text"].reset {
 	height: 1.4em;
 }
@@ -44,6 +46,9 @@ img, .noselect {
 .fill, .fill-x { width: 100%; }
 .fill, .fill-y { height: 100%; }
 .fill-2em { width: 2em; height: 2em; }
+.fill-1em { width: 1em; height: 1em; }
+
+.right { float: right; }
 
 .bg-cover {
 	background-size: cover;

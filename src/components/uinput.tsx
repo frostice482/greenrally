@@ -6,7 +6,7 @@ export default class UInput {
         this.input = input as HTMLInputElement
         this.node = this.makeNode()
 
-        this.input.addEventListener("focus", () => {
+        this.input.addEventListener("input", () => {
             this.resetError()
         })
         this.input.addEventListener("blur", () => {

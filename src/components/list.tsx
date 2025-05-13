@@ -1,6 +1,6 @@
 import { ReactElement } from "jsx-dom"
 import BComp from "./bcomp"
-import Rally from "./rally"
+import RallyCard from "./rallycard"
 import { Tag } from "./util"
 
 export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends BComp<T> {
@@ -43,7 +43,7 @@ export default class RallyList<T extends RallyListOpts = RallyListOpts>  extends
 
         const onRallyInfo = this.props.onRallyInfoClick
         for (const rally of rallies) {
-            this.rallies.set(rally, oldRallies.get(rally) ?? <Rally
+            this.rallies.set(rally, oldRallies.get(rally) ?? <RallyCard
                 rally={rally}
                 onInfoClick={() => onRallyInfo?.(rally)}
                 onTagClick={tag => this.selectTag(tag, true)}

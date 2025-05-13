@@ -19,16 +19,19 @@ export default class RallyInfo<T extends RallyInfoOpts = RallyInfoOpts> extends 
         const status = t < rally.startTime ? 'Upcoming' : t < rally.endTime ? 'Ongoing' : 'Outdated'
         const bg = `linear-gradient(to bottom, #fff5, #fffe 5em), url('${rally.backgroundLink}')`
 
-        return <div class="rally-detail container" style={{ backgroundImage: bg }}>
-            <h2>{rally.name}</h2>
-            {rally.author.name} - {Format.dateTime.formatRange(rally.startTime, rally.endTime)}
-            <span class={["rally-ttag", isOngoing ? "rally-ttag-current" : "rally-ttag-not"]}>{status}</span>
-            <hr/>
+        return <div class="rally-detail flex-col container" style={{ backgroundImage: bg }}>
+            <div>
+                <h2>{rally.name}</h2>
+                {rally.author.name} - {Format.dateTime.formatRange(rally.startTime, rally.endTime)}
+                <span class={["rally-ttag", isOngoing ? "rally-ttag-current" : "rally-ttag-not"]}>{status}</span>
+                <hr/>
+            </div>
 
-            <div>{rally.description}</div>
-            <div class="flex-row justify-between margin-top align-center">
+            <div class="flow">{rally.description}</div>
+
+            <div class="margin-top">
                 <small>Tags: {rally.tags.map(v => <Tag name={v} onClick={() => this.props.onTagClick?.(v)}/>)}</small>
-                <button class="rally-button" onClick={this.props.onJoinClick}>Join</button>
+                <button class="rally-button right" onClick={this.props.onJoinClick}>Join</button>
             </div>
         </div>
     }

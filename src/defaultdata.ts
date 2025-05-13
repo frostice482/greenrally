@@ -1,7 +1,8 @@
 import Data from "data";
 
 const lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-const lipsumLong = lipsum + ", sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+let lipsumLong = lipsum + ", sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+lipsumLong = lipsumLong.repeat(20)
 
 const data = new Data
 data.loadJSON({
@@ -69,12 +70,14 @@ data.loadJSON({
             name: "sugoma",
             aboutMe: lipsumLong,
             email: "dummy@example.com",
-            password: "\0\b\r\t\v\n\f",
-            profileLink: "",
+            password: "2147483647",
+            profileLink: "https://static.wikia.nocookie.net/amogus/images/9/93/Sugoma.png/revision/latest",
             recentRallies: ["1"]
         }]
     ]
 })
 data.load()
+
+Object.assign(globalThis, { data })
 
 export default data
