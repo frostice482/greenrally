@@ -41,7 +41,7 @@ body {
 	margin-left: 16px;
 	font-family: "Instrument Sans", sans-serif;
 	font-weight: 400;
-	font-size: 175%;
+	font-size: 165%;
 	color: #285D00;
 	text-decoration: none;
 }
@@ -122,9 +122,9 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 600;
 	font-size: 24px;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;
 }
 .item-tags{
 	font-family: "Inter", sans-serif;
