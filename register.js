@@ -26,7 +26,8 @@ function submit(){
 	if(valid[0] && valid[1] && valid[2]){
 		localStorage.Email = document.getElementById('email').value;
 		localStorage.Password = document.getElementById('password').value;
-		localStorage.Usernames = document.getElementById('username').value;
+		localStorage.Username = document.getElementById('username').value;
+		console.log(localStorage.Username);
 		document.getElementById('success-message').classList.add('success-shown');
 		setTimeout(function() {
 			window.location.href = "./login.html";
