@@ -28,24 +28,29 @@ document.getElementById('modal-button').addEventListener('click', (e) => {
 			message.innerHTML = '';
 		}, 400);
 	}, 3000);
-	})
+})
+
+function attachPill(item){
+item.addEventListener('click', (e) => {
+	e.target.classList.toggle('toggled');
+});
+}
+function attachItem(item){
+item.addEventListener('click', (e) => {
+	const modal = document.getElementById("modal");
+	modal.classList.add('modal');
+});
+}
+
+function attachItems(){
+	items = document.getElementsByClassName('item');
+	for(i = 0; i < items.length; i++){
+		attachItem(items.item(i));
+	}
+}
 
 
-	function attachPill(item){
-		item.addEventListener('click', (e) => {
-			e.target.classList.toggle('toggled');
-		});
-	}
-	function attachItem(item){
-		item.addEventListener('click', (e) => {
-			const modal = document.getElementById("modal");
-			modal.classList.add('modal');
-		});
-	}
-
-	function attachItems(){
-		items = document.getElementsByClassName('item');
-		for(i = 0; i < items.length; i++){
-			attachItem(items.item(i));
-		}
-	}
+if(localStorage.loggedIn){
+	const docTop = document.getElementById('right-top');
+	docTop.innerHTML = `<div class="sign-in">Welcome, ${localStorage.Username}</div>`
+}
