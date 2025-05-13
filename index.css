@@ -255,6 +255,10 @@ body {
 	background-color: #C4DBA0;
 }
 
+.message-failed {
+	pointer-events: auto !important;
+	background-color: #BF5B53;
+}
 .message-text {
 	margin: auto;
 	font-family: "Inter", sans-serif;

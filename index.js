@@ -19,15 +19,27 @@ document.getElementById('modal').addEventListener('click', (e) => {
 document.getElementById('modal-button').addEventListener('click', (e) => {
 	const message = document.getElementById('message');
 	message.style.opacity = 1;
-	message.classList.add('message-success');
-	message.innerHTML = '<div class="message-text">You successfully joined the event!</div>';
-	setTimeout(function(){
-		message.style.opacity = 0;
-		setTimeout(function() {
-			message.classList.remove('message-success');
-			message.innerHTML = '';
-		}, 400);
-	}, 3000);
+	if(localStorage.loggedIn){
+		message.classList.add('message-success');
+		message.innerHTML = '<div class="message-text">You successfully joined the event!</div>';
+		setTimeout(function(){
+			message.style.opacity = 0;
+			setTimeout(function() {
+				message.classList.remove('message-success');
+				message.innerHTML = '';
+			}, 400);
+		}, 3000);
+	} else {
+		message.classList.add('message-failed');
+		message.innerHTML = '<div class="message-text">Please log in before joining events!</div>';
+		setTimeout(function(){
+			message.style.opacity = 0;
+			setTimeout(function() {
+				message.classList.remove('message-failed');
+				message.innerHTML = '';
+			}, 400);
+		}, 3000);
+	}
 })
 
 function attachPill(item){
