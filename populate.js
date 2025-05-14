@@ -60,10 +60,7 @@ document.getElementById('search').addEventListener('input', (e) => {
 
 function repopulate(){
 	const content = document.getElementById('content');
-	content.innerHTML = `
-		<div class="item-row" data-populated="0">
-		</div>
-	`
+	content.innerHTML = ''
 	data.map(populate);
 }
 function populate(item){
@@ -79,24 +76,12 @@ function populate(item){
 			taglist += item.tags[i];
 		} else taglist += item.tags[i] + ", ";
 	}
-	let row = document.getElementsByClassName('item-row');
-	let lastRow = row.item(row.length - 1);
-
-	if(lastRow.dataset.populated == 3){
-		content.insertAdjacentHTML('beforeend', `
-			<div class="item-row" data-populated=0>
-			</div>
-		`);
-		row = document.getElementsByClassName('item-row');
-		lastRow = row.item(row.length - 1);
-	}
-	lastRow.insertAdjacentHTML('beforeend', `
+	content.insertAdjacentHTML('beforeend', `
 	<div class="item">
 		<span class="item-title">${item.title}</span>
 		<div class="item-tags">Tags: ${taglist}</div>
 		<div class="item-description">${item.description}</div>
 	</div>`
 	);
-	lastRow.dataset.populated++;
 }
 
