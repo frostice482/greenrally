@@ -14,9 +14,11 @@ for(i = 0; i < itemTitles.length; i++){
 }
 
 document.getElementById('modal').addEventListener('click', (e) => {
-	e.target.classList.remove('modal');
-	document.body.style.overflow = 'auto';
-	console.log(document.body);
+	if(e.target.id == 'modal'){
+		e.target.classList.remove('modal');
+		document.body.style.overflow = 'auto';
+		console.log(document.body);
+	}
 })
 document.getElementById('modal-button').addEventListener('click', (e) => {
 	const message = document.getElementById('message');
