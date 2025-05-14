@@ -15,6 +15,8 @@ for(i = 0; i < itemTitles.length; i++){
 
 document.getElementById('modal').addEventListener('click', (e) => {
 	e.target.classList.remove('modal');
+	document.body.style.overflow = 'auto';
+	console.log(document.body);
 })
 document.getElementById('modal-button').addEventListener('click', (e) => {
 	const message = document.getElementById('message');
@@ -50,6 +52,8 @@ item.addEventListener('click', (e) => {
 function attachItem(item){
 item.addEventListener('click', (e) => {
 	const modal = document.getElementById("modal");
+	document.body.style.overflow = 'hidden';
+	console.log(document.body);
 	modal.classList.add('modal');
 });
 }
