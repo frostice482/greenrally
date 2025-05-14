@@ -12,6 +12,7 @@ body {
 	width: 100%;
 	padding: 4px;
 	height: 5vh;
+	min-height: 48px;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
