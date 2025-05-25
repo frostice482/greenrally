@@ -27,11 +27,12 @@ function submit(){
 		localStorage.Email = document.getElementById('email').value;
 		localStorage.Password = document.getElementById('password').value;
 		localStorage.Username = document.getElementById('username').value;
+		localStorage.UserType = "Participant";
 		console.log(localStorage.Username);
 		document.getElementById('success-message').classList.add('success-shown');
 		setTimeout(function() {
 			window.location.href = "./login.html";
-		}, 3000);
+		}, 1000);
 	}
 }
 

@@ -8,7 +8,9 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="./styles/index.css">
+		<script defer src="./scripts/populate.js"></script>
+		<script defer src="./scripts/index.js"></script>
 	</head>
 	<body>
 		<div class="top">
@@ -25,51 +27,51 @@
 				</div>
 				<div class="navbar-container">
 					<div class="right" id="right-top">
-						<a href="./login.html" class="sign-in">Sign in</a>
+						<a href="./pages/login.html" class="sign-in">Sign in</a>
 					</div>
 				</div>
 			</div>
 			<div class="pills-container">
-				<button class="pill" id="1"> Events </button>	
-				<button class="pill" id="2"> Activities </button>	
+				<button class="pill" id="1">Event</button>	
+				<button class="pill" id="2">Activity</button>	
 			</div>
 		</div>
 		<div class="content" id="content">
 		</div>
 		<div class="modal-invisible" id="modal">
 			<div class="modal-content">
-				<div class="modal-top">
+				<div class="modal-top" id="modal-top">
 					<div class="tags-container">
-						<div class="tags">Tags: Event</div>
+						<div class="tags" id="modal-tags">Tags: Event</div>
 					</div>
 					<div class="props-container">
-						<div class="item-title">Lorem Ipsum</div>
+						<div class="item-title" id="modal-title">Lorem Ipsum</div>
 						<div class="item-props-container">
 							<div class="item-props-titles">
-								<div class="item-tags"><b>Started By</b></div>
-								<div class="item-tags"><b>Start Time</b></div>
-								<div class="item-tags"><b>End Time</b></div>
+								<div class="item-tags" id="started-title"><b>Started By</b></div>
+								<div class="item-tags" id="start-title"><b>Start Time</b></div>
+								<div class="item-tags" id="end-title"><b>End Time</b></div>
 							</div>
 							<div class="item-props-contents">
-								<div class="item-tags">Lorem</div>
-								<div class="item-tags">32nd December 2027</div>
-								<div class="item-tags">32nd December 2027</div>
+								<div class="item-tags" id="author">Lorem</div>
+								<div class="item-tags" id="start-time">32nd December 2027</div>
+								<div class="item-tags" id="end-time">32nd December 2027</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="divider"></div>
-				<div class="modal-description">
+				<div class="modal-description" id="modal-description">
 					The following is a brief description of a sample event that could occur as a part of this application
+				</div>
 				<button class="modal-button" id="modal-button">
 					Join Event!
 				</button>
-			</div>
 		</div>
 	</div>
 	<div class="message" id="message" style="opacity: 0;">
 	</div>
-	<script src="./populate.js"></script>
-	<script src="./index.js"></script>
+	<button class="create-button hidden" id="create-button">
+	</button>
 	</body>
 </html>

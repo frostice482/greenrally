@@ -28,6 +28,6 @@ function submit(){
 
 	localStorage.loggedIn = true;
 	setTimeout(function(){
-		window.location.href = "./index.html";
-	}, 3000);
+		window.location.href = "../index.html";
+	}, 1000);
 }
