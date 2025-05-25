@@ -46,6 +46,7 @@ document.getElementById('input-modal-tags').addEventListener('change', (e) => {
 })
 
 document.getElementById('input-button').addEventListener('click', (e) =>{
+	e.preventDefault();
 	rawTags = document.getElementById('input-modal-tags').value.split(',');
 	let tags = rawTags.map(item => item.trim())
 	let isEvent = true;

@@ -33,7 +33,7 @@ function generateProfile(){
 		<div class="item-description">Email: ${localStorage.Email}</div>
 	`
 		if(localStorage.UserType == "Participant"){
-			root.insertAdjacentHTML('beforeend', `
+			document.body.insertAdjacentHTML('beforeend', `
 			<button class="create-button" id="create-button">Want to contribute? Become a coordinator!</div>
 			`);
 		}
