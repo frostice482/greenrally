@@ -1,4 +1,4 @@
-const data = [
+const BaseData = [
 	{
 		"uid": 0,
 		"title": "Event 1",
@@ -17,8 +17,8 @@ const data = [
 	},
 	{
 		"uid": 2,
-		"title": "Test 1",
-		"tags": ["Event", "Conservation"],
+		"title": "March for Water",
+		"tags": ["Event", "Water"],
 		"description": "A Sample Event to Test Parsing Data",
 		"author": "Admin",
 		"start": new Date('2025-05-12'),
@@ -36,23 +36,32 @@ const data = [
 	{
 		"uid": 4,
 		"title": "Activity 2",
-		"tags": ["Activity", "Conservation"],
+		"tags": ["Activity", "Water"],
 		"description": "A Sample Event to Test Parsing Data",
 		"author": "Admin",
 	},
 	{
 		"uid": 5,
-		"title": "Test 2",
-		"tags": ["Event", "Conservation"],
-		"description": "A description i must keep writing words to demonstrate that the elipsis might work if i try hard enough this is such a pain AAAA help me PLEASE i don't know what to do lorem ipsum dolor sit amet have you ever had a borgar i reeeeaally want a borgar and now we continue writing about this test event that is TOTALLY real don't you wanna conserve some trees lol ASTAGA MASIH KURANG okay we continue uhhhh trees yea pog",
+		"title": "Reforstation",
+		"tags": ["Event", "Reforestation"],
+		"description": "Sample Event",
 		"author": "Admin",
 		"start": new Date('2025-05-12'),
 		"end": new Date('2025-05-13')
 	},
 ]
 
+var data = Array.from(BaseData);
+
+if(typeof(localStorage.items) != 'undefined'){
+	items = JSON.parse(localStorage.items);
+	console.log(items);
+	items.forEach(function(item){
+		data.push(item)
+	})
+}
 var filter = "";
-var tagFilter = [""];
+var tagFilter = [];
 data.map(populate)
 
 document.getElementById('search').addEventListener('input', (e) => {
@@ -62,10 +71,24 @@ document.getElementById('search').addEventListener('input', (e) => {
 })
 
 function repopulate(){
+	data = [];
+	console.log(data);
+	data = Array.from(BaseData);
+	console.log(data);
+	console.log(BaseData);
+	if(typeof(localStorage.items) != 'undefined'){
+		items = JSON.parse(localStorage.items);
+		console.log(items);
+		items.forEach(function(item){
+			console.log('pushing');
+			data.push(item)
+		})
+	}
 	const content = document.getElementById('content');
 	content.innerHTML = ''
 	data.map(populate);
 }
+
 function populate(item){
 	if(filter != ""){
 		if(!item.title.toLowerCase().includes(filter.toLowerCase())){

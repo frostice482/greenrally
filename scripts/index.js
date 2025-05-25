@@ -17,20 +17,25 @@ document.getElementById('input-modal').addEventListener('click', (e) => {
 	if(e.target.id == 'input-modal'){
 		e.target.classList.remove('modal');
 		document.body.style.overflow = 'auto';
-		console.log(document.body);
-		const createButton = document.getElementById("create-button");
-		createButton.classList.remove('hidden');
+		if(localStorage.UserType == "Coordinator"){
+			const createButton = document.getElementById("create-button");
+			createButton.classList.remove('hidden');
+		}
 	}
 })
 document.getElementById('modal').addEventListener('click', (e) => {
 	if(e.target.id == 'modal'){
 		e.target.classList.remove('modal');
 		document.body.style.overflow = 'auto';
-		const createButton = document.getElementById("create-button");
-		createButton.classList.remove('hidden');
+		if(localStorage.UserType == "Coordinator"){
+			const createButton = document.getElementById("create-button");
+			createButton.classList.remove('hidden');
+		}
 	}
 })
 document.getElementById('modal-button').addEventListener('click', (e) => {
+	const button = document.getElementById('modal-button');
+
 	const message = document.getElementById('message');
 	message.style.opacity = 1;
 	if(localStorage.loggedIn){
@@ -107,8 +112,8 @@ function populateModal(id){
 		endTitle.classList.remove("hidden");
 		startTime.classList.remove("hidden");
 		endTime.classList.remove("hidden");
-		startTime.innerHTML = item.start.toDateString();
-		endTime.innerHTML = item.end.toDateString();
+		startTime.innerHTML = item.start.toLocaleString();
+		endTime.innerHTML = item.end.toLocaleString();
 	}
 	title.innerHTML = item.title;
 	description.innerHTML = item.description;
