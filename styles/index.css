@@ -3,6 +3,8 @@ body {
 	padding: 0;
 	margin: 0;
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 .top {
 	position: sticky;
@@ -99,7 +101,9 @@ body {
 .content {
 	width: 100%;
 	display: flex;
+	flex: 1;
 	flex-direction: row;
+	align-content: flex-start;
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
@@ -144,6 +148,7 @@ body {
 	max-height: 60%;
 }
 .modal-invisible {
+	height: 0;
 	visibility: hidden;
 }
 .modal {
@@ -240,8 +245,7 @@ body {
 }
 
 .create-button {
-	position: -webkit-sticky;
-	position: sticky;
+	position: fixed;
 	align-self: flex-end;
 	bottom: 20px;
 	right: 20px;
@@ -283,22 +287,25 @@ body {
 	width: 100%;
 	z-index: 2;
 	pointer-events: none;
-	height: 10%;
 	position: fixed;
 	bottom: 0;
 	display: flex;
 	align-items: center;
+	height: 0;
 }
 
 .message-success {
 	pointer-events: auto !important;
 	background-color: #C4DBA0;
 	transition: opacity 0.4s;
+	height: 10%;
 }
 
 .message-failed {
 	pointer-events: auto !important;
 	background-color: #BF5B53;
+	transition: opacity 0.4s;
+	height: 10%;
 }
 .message-text {
 	margin: auto;
