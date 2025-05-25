@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="./styles/index.css">
 		<script defer src="./scripts/populate.js"></script>
 		<script defer src="./scripts/index.js"></script>
+		<script defer src="./scripts/input.js"></script>
 	</head>
 	<body>
 		<div class="top">
@@ -67,11 +68,46 @@
 				<button class="modal-button" id="modal-button">
 					Join Event!
 				</button>
+			</div>
 		</div>
-	</div>
-	<div class="message" id="message" style="opacity: 0;">
-	</div>
-	<button class="create-button hidden" id="create-button">
-	</button>
+		</div>
+		<div class="modal-invisible" id="input-modal">
+			<div class="modal-content modal-input">
+				<div class="modal-top">
+					<div class="tags-container">
+						<input type="text" class="tags" id="input-modal-tags" placeholder="Tags, seperated by ','">
+					</div>
+					<div class="props-container">
+						<input type="text" class="item-title modal-text-input" id="input-modal-title" placeholder="Event title">
+						<div class="item-props-container">
+							<div class="item-props-titles">
+								<div class="container">
+									<div class="item-tags" id="input-started-title"><b>Started By</b></div>
+									<div class="item-tags" id="input-author">Lorem</div>
+								</div>
+								<div class="container">
+									<div class="item-tags" id="input-start-title"><b>Start Time</b></div>
+									<input type="datetime-local" class="item-tags modal-text-input" id="input-start-time">
+								</div>
+								<div class="container">
+									<div class="item-tags" id="input-end-title"><b>End Time</b></div>
+									<input type="datetime-local" class="item-tags modal-text-input" id="input-end-time">							
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="divider"></div>
+				<textarea class="modal-description" id="input-modal-description" placeholder="Write a brief description of what your activity or event is!"></textarea>
+				<button class="modal-button" id="input-button">
+					Publish Event!
+				</button>
+			</div>
+		</div>
+		</div>
+		<div class="message" id="message" style="opacity: 0;">
+		</div>
+		<button class="create-button hidden" id="create-button">
+		</button>
 	</body>
 </html>

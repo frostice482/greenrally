@@ -13,11 +13,21 @@ for(i = 0; i < itemTitles.length; i++){
 	itemNames.push(itemTitles.item(i).innerHTML);
 }
 
+document.getElementById('input-modal').addEventListener('click', (e) => {
+	if(e.target.id == 'input-modal'){
+		e.target.classList.remove('modal');
+		document.body.style.overflow = 'auto';
+		console.log(document.body);
+		const createButton = document.getElementById("create-button");
+		createButton.classList.remove('hidden');
+	}
+})
 document.getElementById('modal').addEventListener('click', (e) => {
 	if(e.target.id == 'modal'){
 		e.target.classList.remove('modal');
 		document.body.style.overflow = 'auto';
-		console.log(document.body);
+		const createButton = document.getElementById("create-button");
+		createButton.classList.remove('hidden');
 	}
 })
 document.getElementById('modal-button').addEventListener('click', (e) => {
@@ -65,6 +75,8 @@ item.addEventListener('click', (e) => {
 	const modal = document.getElementById("modal");
 	document.body.style.overflow = 'hidden';
 	modal.classList.add('modal');
+	const createButton = document.getElementById("create-button");
+	createButton.classList.add('hidden');
 });
 }
 
@@ -114,8 +126,29 @@ function attachItems(){
 if(localStorage.loggedIn){
 	const docTop = document.getElementById('right-top');
 	docTop.innerHTML = `<a href="./pages/profile.html" class="sign-in">Welcome, ${localStorage.Username}</div>`
+	
+	if(localStorage.UserType == "Coordinator"){
+		const createButton = document.getElementById('create-button');
+
+		const author = document.getElementById('input-author');
+		author.innerHTML = localStorage.Username;
+
+		createButton.classList.remove("hidden");
+		createButton.innerHTML = "Create new Event or Activity!";
+		attachCreateButton();
+	}
 }
 
+function attachCreateButton(){
+	const create = document.getElementById("create-button");
+	create.addEventListener('click', (e) => {
+		const modalInput = document.getElementById('input-modal');
+		document.body.style.overflow = 'hidden';
+		modalInput.classList.add('modal');
+		const createButton = document.getElementById("create-button");
+		createButton.classList.add('hidden');
+	});
+}
 function updateFilter(){
 	const toggled = document.getElementsByClassName("toggled");
 	tagFilter = [];
