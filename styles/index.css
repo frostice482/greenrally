@@ -133,9 +133,8 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
 	font-size: 16px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
+	overflow-x: scroll;
+	margin-top: 8px;
 }
 .item-description {
 	margin-top: 16px;
@@ -192,6 +191,8 @@ body {
 	margin: 16px 0px 0px;
 	padding: 4px 8px;
 	background-color:#E8D7C7;
+	max-width: 40%;
+	overflow-x: scroll;
 	border-radius: 8px;
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
