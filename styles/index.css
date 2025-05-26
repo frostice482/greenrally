@@ -94,7 +94,8 @@ body {
 }
 
 .toggled {
-	background-color: #F0E2D8 !important;
+	color: #F7F6F1;
+	background-color: #ab7b54 !important;
 	transition: background-color 0.2s;
 }
 
