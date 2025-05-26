@@ -21,7 +21,6 @@
 				];
 			shellHook = ''
 				tmux new-session -A -s Greenrally
-				npx serve
 				'';
 			};
 		};
