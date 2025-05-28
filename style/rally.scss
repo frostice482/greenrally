@@ -1,0 +1,119 @@
+@use "colors.scss" as color;
+@use "util.scss";
+
+.rally-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.rally-card {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+
+    border-radius: 0.5em;
+
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.rally-card-detail {
+    padding: 8px;
+    background: #0009;
+    border-top: 1px solid black;
+    color: white;
+    gap: 4px;
+}
+
+.rally-tag {
+    padding: 2px 6px;
+    background: color.$wood;
+    border-radius: 0.3em;
+    color: white;
+
+    &:is(:hover, .focus) {
+        background-color: color.$green;
+    }
+}
+
+.rally-time {
+    padding: 2px 3px;
+    border-radius: 0.25em;
+    color: white;
+
+    &-upcoming {
+        @extend .rally-time;
+        background-color: color.$blue-dark;
+        &::before {
+            content: 'Upcoming'
+        }
+    }
+    &-ongoing {
+        @extend .rally-time;
+        background-color: color.$green;
+        &::before {
+            content: 'Ongoing'
+        }
+    }
+    &-outdated {
+        @extend .rally-time;
+        background-color: gray;
+        &::before {
+            content: 'Outdated'
+        }
+    }
+    &-activity {
+        @extend .rally-time;
+        background-color: color.$blue-dark;
+        &::before {
+            content: 'Activity'
+        }
+    }
+}
+
+.rally > :nth-child(2) {
+    white-space: pre-wrap;
+    padding: 32px;
+}
+
+.rally-header {
+    padding: 0 16px;
+    height: 300px;
+
+    grid-template-areas:
+        '. . . . .'
+        'a . . . b'
+        'c c . d d'
+    ;
+    grid-template-rows: 8fr 80px 12fr;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: end;
+    color: white;
+
+    & > :nth-child(3) {
+        padding-bottom: 4px;
+    }
+}
+
+.rally-join-button {
+    width: 80px;
+    &::after { content: 'Join'; }
+}
+
+.rally-joined-button {
+    width: 80px;
+    &::after { content: 'Joined!'; }
+}
+
+.rally-edit-button {
+    width: 80px;
+    &::after { content: 'Edit'; }
+}
+
+.rally-leave-button {
+    width: 80px;
+    &::after { content: 'Joined'; }
+    &:hover::after { content: 'Leave'; }
+}

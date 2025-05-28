@@ -1,0 +1,176 @@
+@use "colors.scss" as color;
+@use "util.scss";
+@use "util2.scss";
+@use "rally.scss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Merienda:wght@300..900&display=swap');
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    background: #f0fff3;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    @extend .grid-3;
+    padding: 8px 16px;
+    background: color.$green-lighter;
+
+    grid-template-areas: 'a b c';
+    grid-template-columns: 250px auto 250px;
+    justify-items: center;
+    align-items: center;
+
+    & > :nth-child(1) { justify-self: left; }
+    & > :nth-child(3) { justify-self: right; }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+input {
+    @extend .reset;
+}
+
+button, select {
+    @extend .reset;
+    cursor: pointer;
+}
+
+textarea {
+    @extend .reset;
+    cursor: text;
+}
+
+input.border {
+    border-radius: 0.3em;
+}
+
+img {
+    object-fit: contain;
+}
+
+select {
+    padding: 0 4px;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+#search {
+    @extend .container-small;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+
+    background: color.$wood-light;
+
+    display: flex;
+
+    &:not(.focus) > #search-result {
+        display: none;
+    }
+}
+
+#search-result {
+    position: absolute;
+    left: 0;
+
+    background: white;
+}
+
+#title {
+    font-family: "Merienda", cursive;
+    letter-spacing: -2px;
+    color: color.$green-darker;
+    font-size: 30px;
+}
+
+#login-button {}
+
+#create-button {
+    display: flex;
+}
+
+#account-button {
+}
+
+.login-container {
+    padding: 24px 48px;
+    background: color.$wood-light;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+button.bx {
+    border: 1px solid transparent;
+    background: color.$green-dark;
+    color: white;
+    &:hover { background-color: color.$green-light; }
+}
+
+button.bhx {
+    --btncol: #{color.$green};
+    --btncol-hover: var(--btncol);
+    --hollowcol: #fff1;
+    --hollowcol-hover: #fff3;
+
+    --fbtncol: var(--btncol);
+    --fhollowcol: var(--fbtncol);
+
+    border: 1px solid var(--fbtncol);
+    background-color: color-mix(in srgb, var(--fbtncol) 25%, var(--hollowcol) 75%);
+
+    &:hover {
+        --fbtncol: var(--btncol-hover);
+        --fhollowcol: var(--hollowcol-hover);
+    }
+}
+
+.discardable {
+    padding-left: 4px;
+    border: 1px solid black;
+    border-radius: 0.35em;
+
+    & > :last-child {
+        margin-left: 4px;
+        padding: 0 4px;
+        border-radius: 25%;
+        background: #f003;
+
+        &:hover {
+            background-color: #f005;
+        }
+    }
+
+    &:not(:hover) {
+        padding-right: 4px;
+    }
+
+    &:not(:hover) > :last-child {
+        display: none;
+    }
+}

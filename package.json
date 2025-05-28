@@ -1,0 +1,17 @@
+{
+	"devDependencies": {
+		"jsx-dom": "^8.1.6",
+		"sass": "^1.85.1",
+		"vite": "6.2.1",
+		"vite-tsconfig-paths": "^5.1.4"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"jsx-dom": "patches/jsx-dom.patch"
+		}
+	},
+	"scripts": {
+		"dev": "vite -c viteconfig.js",
+		"build": "vite build -c viteconfig.js"
+	}
+}

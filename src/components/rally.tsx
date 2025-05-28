@@ -1,0 +1,146 @@
+import { VData } from "data"
+import BComp from "./bcomp"
+import { Button, UserIcon } from "./util"
+import { NamedTab, TabNode } from "./namedtab"
+import Format from "lib/formats"
+import Rally_About from "./rallyc_about"
+import Rally_Members from "./rallyc_members"
+import Rally_Forums from "./rallyc_forums"
+import Forum from "./forum"
+import { nodeState } from "lib/state"
+import { ReactElement } from "jsx-dom"
+import defaultImage from "/default.webp?url"
+
+export default class RallyContainer extends BComp<RallyContainerOptions> {
+    tabs = new NamedTab<RallyTabs>({
+        about: new Rally_About(this.props.rally),
+        forums: new Rally_Forums({
+            rally: this.props.rally,
+            onForumClick: forum => this.switchToForum(forum)
+        }),
+        members: new Rally_Members({
+            rally: this.props.rally,
+            onProfileClick: user => this.props.onProfileClick?.(user)
+        })
+    }, 'about')
+
+    get joined() { return this.props.joined ?? false }
+    set joined(v) { this.props.joined = v }
+
+    get owner() { return this.props.isCreator ?? false }
+    set owner(v) { this.props.isCreator = v }
+
+    joinBtn = nodeState<ReactElement>()
+
+    forumCache = new WeakMap<VData.Forum, Forum>()
+
+    protected updateJoin() {
+        const isEditable = this.props.rally.isActivity || this.props.rally.startTime > Date.now()
+        let newBtn
+        if (!isEditable) {}
+        else if (this.owner) {
+            newBtn = <Button hollow class="rally-edit-button" onClick={this.props.onEdit}/>
+        }
+        else {
+            if (this.joined)
+                newBtn = <Button hollow class="rally-leave-button" style={{'--btncol-hover': '#fd9'}} onClick={() => this.handleLeave()}/>
+            else
+                newBtn = <Button class="rally-join-button" onClick={() => this.handleJoin()}/>
+        }
+        this.joinBtn(newBtn ?? null)
+    }
+
+    protected handleJoin() {
+        const r = this.props.onJoin?.() ?? true
+        if (!r) return
+
+        const btn = <Button class="rally-joined-button" onPointerLeave={() => this.updateJoin()}/>
+        this.joinBtn(btn)
+
+        this.joined = true
+        this.props.onJoin?.()
+    }
+
+    protected handleLeave() {
+        this.props.onLeave?.()
+
+        this.joined = false
+        this.updateJoin()
+    }
+
+    protected switchToForum(forum: VData.Forum) {
+        let f = this.forumCache.get(forum)
+        if (!f) this.forumCache.set(forum, f = new Forum({
+            forum: forum,
+            onProfileClick: this.props.onProfileClick
+        }))
+        this.tabs.contentNode(f.render())
+    }
+
+    protected makeHeaderDetail() {
+        const rally = this.props.rally
+        const t = Date.now()
+        const x = rally.isActivity ? 'activity'
+            : t < rally.startTime ? 'upcoming'
+            : t < rally.endTime ? 'ongoing'
+            : 'outdated'
+
+        const fmt = Format.dateTime.formatRange(rally.startTime, rally.endTime)
+
+        return <div>
+            <h1>{rally.title}</h1>
+            <UserIcon user={rally.author} onClick={() => this.props.onProfileClick?.(rally.author)}/>
+            <small class="flex-aa">{!rally.isActivity && fmt}<div class={'rally-time-'+x}></div></small>
+        </div>
+    }
+
+    protected makeNav() {
+        this.updateJoin()
+        return <div class="flex-col" style={{alignItems: 'end', gap: '4px'}}>
+            {this.joinBtn()}
+            <TabNode
+                tab={this.tabs}
+                buttons={{
+                    about: 'About',
+                    forums: 'Forums',
+                    members: 'Members'
+                }}
+            />
+        </div>
+    }
+
+    protected makeHeader() {
+        const rally = this.props.rally
+        const bg = `linear-gradient(to bottom, #0007), url(${JSON.stringify(rally.pictureLinks[0] || defaultImage)})`
+
+        return <div class="rally-header bgcover grid-4" style={{backgroundImage: bg}}>
+            <div></div>
+            <div></div>
+            {this.makeHeaderDetail()}
+            {this.makeNav()}
+        </div>
+    }
+
+    protected makeNode() {
+        return <div class="rally">
+            {this.makeHeader()}
+            {this.tabs.contentNode()}
+        </div>
+    }
+}
+
+export interface RallyTabs {
+    about: Rally_About
+    forums: Rally_Forums
+    members: Rally_Members
+}
+
+export interface RallyContainerOptions {
+    joined?: boolean
+    isCreator?: boolean
+    rally: VData.Rally
+    onProfileClick?: (user: VData.User) => void
+    onJoin?: () => boolean | void | undefined
+    onLeave?: () => void
+    onEdit?: () => void
+}

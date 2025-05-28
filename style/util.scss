@@ -1,0 +1,188 @@
+@use "mixin.scss";
+
+.fill, .fill-x { width: var(--w, var(--x, 100%)); }
+.fill, .fill-y { height: var(--h, var(--x, 100%)); }
+
+.fill-1em { @extend .fill; --x: 1em }
+.fill-15em { @extend .fill; --x: 1.5em }
+.fill-2em { @extend .fill; --x: 2em }
+
+
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+
+.flex-wrap { display: flex; flex-wrap: wrap; }
+.flex-fill { flex: 1 1; }
+
+.flex-aa {
+    display: flex;
+    gap: 4px;
+    align-items: center
+}
+
+.flex-aaa {
+    @extend .flex-aa;
+    padding: 6px 8px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bgcover {
+    background-position: center;
+    background-size: cover;
+}
+
+.bgcontain {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.grid-2 { @include mixin.grid-child(a, b) }
+.grid-3 { @extend .grid-2; @include mixin.grid-child-i(3, c) }
+.grid-4 { @extend .grid-3; @include mixin.grid-child-i(4, d) }
+.grid-5 { @extend .grid-4; @include mixin.grid-child-i(5, e) }
+.grid-6 { @extend .grid-5; @include mixin.grid-child-i(6, f) }
+
+.bigside-top {
+    @extend .grid-3;
+    grid-template-areas:
+        'a a a'
+        'b . c'
+    ;
+    grid-template-columns: auto 1fr auto;
+}
+
+.bigside-bottom {
+    @extend .grid-3;
+    grid-template-areas:
+        'a . b'
+        'c c c'
+    ;
+    grid-template-columns: auto 1fr auto;
+}
+
+.bigside-left {
+    @extend .grid-3;
+    grid-template-areas:
+        'a b'
+        'a c'
+    ;
+    grid-template-columns: auto 1fr;
+    justify-items: left;
+    gap: 0 8px;
+}
+.bigside-right {
+    @extend .grid-3;
+    grid-template-areas:
+        'a c'
+        'b c'
+    ;
+    grid-template-columns: 1fr auto;
+    justify-items: right;
+    gap: 0 8px;
+}
+.bigside-left-s {
+    @extend .grid-3;
+    grid-template-areas:
+        'a .'
+        'a b'
+        'a c'
+        'a .'
+    ;
+    grid-template-columns: auto 1fr;
+    justify-items: left;
+    gap: 0 8px;
+}
+.bigside-right-s {
+    @extend .grid-3;
+    grid-template-areas:
+        '. c'
+        'a c'
+        'b c'
+        '. c'
+    ;
+    grid-template-columns: 1fr auto;
+    justify-items: right;
+    gap: 0 8px;
+}
+
+
+.reset-font {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.reset {
+    @extend .reset-font;
+    margin: 0;
+    padding: 0;
+    background: unset;
+    border: unset;
+    outline: unset;
+}
+
+.linelimit-1 {
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+}
+
+.linelimit {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: var(--c, 1);
+    -webkit-line-clamp: var(--c, 1); /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.col-2 {
+    @extend .grid-2;
+    grid-template-areas: 'a b';
+    grid-template-columns: 1fr 1fr;
+}
+
+.round { border-radius: 50% !important; }
+.right { float: right; }
+
+.container-xsmall {
+    padding: 0px 6px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.container-small {
+    padding: 4px 6px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 8px 12px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.container-large {
+    padding: 16px 24px;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.border2 {
+    border: 1px solid transparent;
+    &:hover {
+        border-color: #0007;
+    }
+}
