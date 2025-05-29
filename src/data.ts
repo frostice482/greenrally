@@ -247,7 +247,7 @@ Every small action adds up! Would you like tips tailored to a specific area (hom
             name: 'Andrew',
             email: 'andrew@greenrally',
             password: 'abcdef',
-            aboutMe: 'I love Nix, I hate Nix, I can\'t get away from Nix',
+            aboutMe: 'fish',
             hasEmailVerified: true,
             pictureLink: 'https://www.translationdirectory.com/images_articles/god_has_created_this/big/fish_wikimedia_0005_big.jpg',
             recentRallies: ['1'],
