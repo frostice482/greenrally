@@ -85,6 +85,9 @@ async function onEditPost(post: RallyEditData) {
         Object.assign(rally, assign)
         data.search.addRally(rally)
 
+        const rallyCard = list?.rallyList.get(rally)
+        rallyCard?.render(true)
+
         const rc = rallyCache.get(rally)
         rc?.render(true)
         rc?.tabs.tabs.about.render(true)
@@ -262,6 +265,12 @@ const editBind = urlLoader.addBind('/edit', [], ({id}) => {
         if (rally && rally.author !== data.currentLogin) rally = undefined
     }
     onEdit(rally)
+})
+
+urlLoader.add('/destroy', [], () => {
+    data.remove()
+    urlLoader.pushState('/', undefined, false)
+    location.reload()
 })
 
 urlLoader.addBind('/', [], onList)

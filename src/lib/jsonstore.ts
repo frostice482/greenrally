@@ -19,6 +19,10 @@ export default abstract class JSONStore<T> {
         return json
     }
 
+    remove() {
+        this.storage.removeItem(this.property)
+    }
+
     abstract loadJSON(data: T): void
 
     abstract toJSON(): T

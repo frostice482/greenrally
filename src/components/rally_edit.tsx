@@ -89,7 +89,6 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
     }
 
     protected trigger() {
-        this.errmsg('')
         const data = this.data()
         if (data.error) return this.handleError(data)
         this.props.onPost?.(data)
@@ -145,10 +144,15 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
                     input: dateEndInput,
                     message: 'End date must be later than start date'
                 }
+                if (start.getTime() < Date.now()) return {
+                    error: true,
+                    input: dateStartInput,
+                    message: 'Created event must be upcoming, not ongoing'
+                }
                 if (end.getTime() < Date.now()) return {
                     error: true,
                     input: dateEndInput,
-                    message: 'Cannot create an outdated event'
+                    message: 'Created event must be upcoming, not outdated'
                 }
             } break;
 
@@ -195,9 +199,10 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
     }
 
     protected makeTitle() {
-        return <div class="flex" style={{alignItems: 'center', gap: '8px'}}>
+        return <div class="flex-aa">
             <h2>{this.isEdit ? 'Edit Rally' : 'Create Rally'}</h2>
-            {this.isEdit && <small>{this.titleInput.value}</small>}
+            {this.isEdit && <small>Editing <b>{this.titleInput.value}</b></small>}
+
             <div class="flex-fill"/>
 
             <span style={{color: 'red'}}>{this.errmsg()}</span>
@@ -206,6 +211,8 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
     }
 
     protected makeNode() {
+        this.errmsg('')
+
         return <form class="rally-edit container fill flex-col" onSubmit={ev => ev.preventDefault()}>
             {this.makeTitle()}
             <hr class="fill-x"/>
