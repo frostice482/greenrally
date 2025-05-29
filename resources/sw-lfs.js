@@ -155,7 +155,7 @@ async function notFound() {
  * @param {string} url
  */
 function convertURL(url) {
-    return 'greenrally/' + url.slice(localPrefix.length)
+    return url.slice(localPrefix.length)
 }
 
 /**

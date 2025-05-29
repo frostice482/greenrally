@@ -37,7 +37,7 @@ export class VData extends JSONStore<DataJson.Root> {
         const hashBuf = crypto.subtle.digest('sha-256', await blob.arrayBuffer())
         const hash = Encoding.toHex(await hashBuf)
 
-        const url = new URL('/local/'+hash, location.origin)
+        const url = new URL('/local/greenrally/'+hash, location.origin)
         fetch(url, { method: 'POST', body: blob })
 
         return url.href

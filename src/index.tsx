@@ -8,8 +8,9 @@ import data, { VData } from "data";
 import { componentState } from "lib/state";
 import urlLoader from "lib/urlloader";
 import RallyEdit, { RallyEditData } from "components/rally_edit";
+import serviceWorkerUrl from "/sw-lfs.js?url"
 
-//navigator.serviceWorker.register('/sw.js')
+navigator.serviceWorker.register(serviceWorkerUrl)
 
 let profilesCache = new WeakMap<VData.User, Profile>()
 let rallyCache = new WeakMap<VData.Rally, RallyContainer>()
@@ -83,6 +84,10 @@ async function onEditPost(post: RallyEditData) {
         data.search.removeRally(rally)
         Object.assign(rally, assign)
         data.search.addRally(rally)
+
+        const rc = rallyCache.get(rally)
+        rc?.render(true)
+        rc?.tabs.tabs.about.render(true)
     } else {
         if (!data.currentLogin) return create?.errmsg('Unauthorized')
         rally = await data.createRally({ author: data.currentLogin.id, ...assign })
@@ -91,7 +96,6 @@ async function onEditPost(post: RallyEditData) {
     list?.updateRallyList(Array.from(data.rallies.values()))
     list?.updateRallyListElement()
     data.save()
-    rallyCache.get(rally)?.render(true)
     onRally(rally)
 
     create = undefined
