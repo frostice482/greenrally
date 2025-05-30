@@ -123,8 +123,8 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
             input: descriptionInput,
             message: 'Description cannot be empty'
         }
-        const start = dateStartInput.valueAsDate
-        const end = dateEndInput.valueAsDate
+        const start = new Date(dateStartInput.valueAsNumber)
+        const end = new Date(dateEndInput.valueAsNumber)
 
         const rallyType = eventTypeInput.value
         switch (rallyType) {
