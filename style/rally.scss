@@ -121,3 +121,28 @@
     &::after { content: 'Joined'; }
     &:hover::after { content: 'Leave'; }
 }
+
+@media screen and (max-width: 572px){
+  .rally-header {
+    padding: 0 16px;
+    height: 450px;
+
+    grid-template-areas:
+    'a .'
+    'b b'
+    '. .'
+    'c .'
+    'd d'
+    ;
+    grid-template-rows: 8fr 120px 12fr 12fr;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: end;
+    color: white;
+
+    & > :nth-child(3) {
+      padding-bottom: 24px;
+    }
+  }
+
+
+}
