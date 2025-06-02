@@ -101,6 +101,7 @@ async function onEditPost(post: RallyEditData) {
     data.save()
     onRally(rally)
 
+    alert("Edit successful")
     create = undefined
 }
 
@@ -164,6 +165,7 @@ function onLogin() {
                 return
             }
 
+            alert("Login successful")
             setBase(user)
         },
         onSwitch: onRegister
@@ -196,6 +198,7 @@ function onRegister() {
             if (hasErr) return
 
             const user = data.register(email, name, password, true)
+            alert("Successfully registered an account")
             setBase(user)
         },
         onSwitch: onLogin
