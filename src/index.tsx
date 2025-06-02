@@ -128,6 +128,10 @@ function onRally(rally: VData.Rally) {
                 onLogin()
                 return false
             }
+            return confirm("Are you sure you want to join this rally?")
+        },
+        onLeave: () => {
+            return confirm("Are you sure you want to leave this rally?")
         },
         onEdit: () => onEdit(rally)
     }))

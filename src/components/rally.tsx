@@ -56,16 +56,17 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
 
         const btn = <Button class="rally-joined-button" onPointerLeave={() => this.updateJoin()}/>
         this.joinBtn(btn)
-
         this.joined = true
-        this.props.onJoin?.()
+        //this.props.onJoin?.()
     }
 
     protected handleLeave() {
-        this.props.onLeave?.()
+        const r = this.props.onLeave?.() ?? true
+        if (!r) return
 
         this.joined = false
         this.updateJoin()
+        //this.props.onLeave?.()
     }
 
     protected switchToForum(forum: VData.Forum) {
@@ -141,6 +142,6 @@ export interface RallyContainerOptions {
     rally: VData.Rally
     onProfileClick?: (user: VData.User) => void
     onJoin?: () => boolean | void | undefined
-    onLeave?: () => void
+    onLeave?: () => boolean | void | undefined
     onEdit?: () => void
 }
