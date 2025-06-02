@@ -32,7 +32,11 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
         <td><label htmlFor="rally-start-input">Start date:</label></td>
         <td><div>
             {this.dateStartInput}
-            <Button size="x" nostyle class="border" onClick={() => this.dateStartInput.valueAsNumber = roundInterval(Date.now(), 60000)}>today</Button>
+            <Button size="x" nostyle class="border" onClick={() => {
+				const date = new Date()
+				const offset = date.getTimezoneOffset()
+				this.dateStartInput.valueAsNumber = roundInterval(Date.now() - offset * 60 * 1000, 60000)
+			}}>today</Button>
         </div></td>
     </tr> as E
 
@@ -40,7 +44,11 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
         <td><label htmlFor="rally-end-input">End date:</label></td>
         <td><div>
             {this.dateEndInput}
-            <Button size="x" nostyle class="border" onClick={() => this.dateEndInput.valueAsNumber = roundInterval(Date.now(), 60000)}>today</Button>
+            <Button size="x" nostyle class="border" onClick={() => {
+				const date = new Date()
+				const offset = date.getTimezoneOffset()
+				this.dateEndInput.valueAsNumber = roundInterval(Date.now() - offset * 60 * 1000, 60000)
+			}}>today</Button>
         </div></td>
     </tr> as E
 
@@ -50,12 +58,14 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
     currentEditId?: string
 
     editFrom(rally: VData.Rally, rerender = true) {
+		const date = new Date()
+		const offset = date.getTimezoneOffset() * 60 * 1000
         this.isEdit = true
         this.currentEditId = rally.id
         this.titleInput.value = rally.title
         this.descriptionInput.value = rally.description
-        this.dateStartInput.valueAsNumber = roundInterval(rally.startTime || Date.now(), 60000)
-        this.dateEndInput.valueAsNumber = roundInterval(rally.endTime || Date.now(), 60000)
+        this.dateStartInput.valueAsNumber = roundInterval(rally.startTime - offset || Date.now(), 60000)
+        this.dateEndInput.valueAsNumber = roundInterval(rally.endTime - offset || Date.now(), 60000)
         this.tagsInput.value = ''
         this.eventTypeInput.value = rally.isActivity ? 'activity' : 'event'
         this.tagsListElm.replaceChildren()
@@ -109,6 +119,8 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
 
     protected data(): RallyEditDataError | RallyEditData {
         const { titleInput, descriptionInput, dateStartInput, dateEndInput, eventTypeInput } = this
+		const date = new Date()
+		const offset = date.getTimezoneOffset() * 60 * 1000
 
         const title = titleInput.value.trim()
         if (!title) return {
@@ -123,8 +135,8 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
             input: descriptionInput,
             message: 'Description cannot be empty'
         }
-        const start = new Date(dateStartInput.valueAsNumber)
-        const end = new Date(dateEndInput.valueAsNumber)
+        const start = new Date(dateStartInput.valueAsNumber + offset)
+        const end = new Date(dateEndInput.valueAsNumber + offset)
 
         const rallyType = eventTypeInput.value
         switch (rallyType) {
