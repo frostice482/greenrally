@@ -91,7 +91,7 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
         return <div>
             <h1>{rally.title}</h1>
             <UserIcon user={rally.author} onClick={() => this.props.onProfileClick?.(rally.author)}/>
-            <small class="flex-aa">{!rally.isActivity && fmt}<div class={'rally-time-'+x}></div></small>
+            <small class="flex-aa rally-time-container">{!rally.isActivity && fmt}<div class={'rally-time-'+x}></div></small>
         </div>
     }
 

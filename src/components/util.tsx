@@ -6,7 +6,7 @@ import userDarkUrl from "/user-dark.svg?url"
 export function RallyTag(opts: { name: string } & O.div) {
     const elm = jsx('button', opts)
     elm.classList.add('rally-tag')
-    elm.append(opts.name)
+    elm.append(String(opts.name).charAt(0).toUpperCase() + opts.name.slice(1));
     return elm
 }
 

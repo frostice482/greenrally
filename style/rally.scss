@@ -14,6 +14,7 @@
     height: 250px;
 
     border-radius: 0.5em;
+    border-style: none;
 
     display: flex;
     flex-direction: column-reverse;
@@ -21,8 +22,10 @@
 
 .rally-card-detail {
     padding: 8px;
+    box-sizing: border-box;
     background: #0009;
-    border-top: 1px solid black;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
     color: white;
     gap: 4px;
 }
@@ -56,7 +59,7 @@
     }
     &-ongoing {
         @extend .rally-time;
-        background-color: color.$green;
+        background-color: color.$green-dark;
         &::before {
             content: 'Ongoing'
         }
@@ -77,6 +80,9 @@
     }
 }
 
+.rally-time-container {
+  margin-top: 8px;
+}
 .rally > :nth-child(2) {
     white-space: pre-wrap;
     padding: 32px;

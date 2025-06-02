@@ -22,7 +22,7 @@ export default class Login extends BComp<LoginOptions> {
     }
 
     protected makeForm() {
-        return <form id="login-form" class="login-container container-large border" onSubmit={ev => ev.preventDefault()}>
+        return <form id="login-form" class="login-container container-large" onSubmit={ev => ev.preventDefault()}>
             <h1>{this.title}</h1>
             <div class="fill-x">{this.inputs.map(v => v.node())}</div>
             <Button onClick={ev => this.onSubmit(ev)}>{this.title}</Button>

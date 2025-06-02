@@ -7,6 +7,7 @@
 
 .tab {
     border-bottom: 4px solid transparent;
+    font-size: 18px;
 
     &.selected {
         border-bottom-color: color.$green-lighter;
@@ -28,11 +29,14 @@
         box-sizing: border-box;
 
         background: white;
-        border: 1px solid currentColor;
+        border: 1px solid color.$border;
         border-radius: 0.5em;
     }
 
     &.error {
         color: red;
+        > input {
+          border: 1px solid red;
+      }
     }
 }
