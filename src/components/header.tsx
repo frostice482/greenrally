@@ -95,7 +95,7 @@ export default class Header extends BComp<HeaderOptions> {
             cnt.style.width = rect.width + 'px'
         })
 
-        return elm
+        return String(location).endsWith('/') ? elm : <div/>
     }
 
     protected makeNode() {

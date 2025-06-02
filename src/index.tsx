@@ -48,10 +48,12 @@ async function onEdit(rally?: VData.Rally) {
         content(create)
 
         editBind.push({id: rally.id})
+		header.render(true);
         document.title = `Edit | GreenRally`
     }
     else {
         editBind.push()
+		header.render(true);
         document.title = `Create | GreenRally`
     }
 }
@@ -113,10 +115,12 @@ function onList() {
     })
     content(list)
     urlLoader.pushState('/')
+	header.render(true);
     document.title = `GreenRally`
 }
 
 function onRally(rally: VData.Rally) {
+	console.log(navigator)
     let r = rallyCache.get(rally)
     if (!r) rallyCache.set(rally, r = new RallyContainer({
         rally: rally,
@@ -137,6 +141,7 @@ function onRally(rally: VData.Rally) {
     }))
     content(r)
     rallyBind.push({ id: rally.id })
+	header.render(true);
     document.title = `${rally.title} | GreenRally`
     return r
 }
@@ -153,6 +158,7 @@ function onProfile(user: VData.User) {
     content(r)
     profileBind.push({ id: user.id })
     document.title = `${user.name} | GreenRally User`
+	header.render(true);
     return r
 }
 
@@ -179,6 +185,7 @@ function onLogin() {
     const h = location.hash.slice(1)
     extraRedirect = h.startsWith('/login') || h.startsWith('/register') ? extraRedirect : h
     loginBind.push({ redirect: extraRedirect })
+	header.render(true);
     //document.title = `Login | GreenRally`
 }
 
@@ -212,6 +219,7 @@ function onRegister() {
     const h = location.hash.slice(1)
     extraRedirect = h.startsWith('/login') || h.startsWith('/register') ? extraRedirect : h
     registerBind.push({ redirect: extraRedirect })
+	header.render(true);
     document.title = `Register | GreenRally`
 }
 
@@ -223,6 +231,7 @@ function onLogout() {
     data.currentLogin = undefined
     data.save()
     urlLoader.pushState('/')
+	header.render(true);
     location.reload()
 }
 
@@ -236,6 +245,8 @@ function setBase(user: VData.User) {
 
     header.setAccount(user)
     urlLoader.pushState(extraRedirect)
+	header.render(true);
+
     location.reload()
 }
 
