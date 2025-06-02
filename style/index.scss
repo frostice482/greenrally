@@ -22,18 +22,17 @@ body {
 }
 
 header {
-    @extend .grid-3;
     padding: 8px 16px;
     background: color.$green-lighter;
-    
-    grid-template-areas: 'a b c';
-    grid-template-columns: auto auto auto;
-    gap: 8px;
-    justify-items: center;
+
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    & > :nth-child(1) { justify-self: left; }
-    & > :nth-child(3) { justify-self: right; }
+    & > :is(:nth-child(1), :nth-child(3)) {
+        width: 100%;
+        max-width: 200px;
+    }
 }
 
 a {

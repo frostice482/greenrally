@@ -65,7 +65,7 @@ export default class Header extends BComp<HeaderOptions> {
     }
 
     protected makeSideNode() {
-        return <div class="flex-aa" style={{gap: '16px'}}>
+        return <div class="flex-aa" style={{gap: '16px', justifyContent: 'right'}}>
             {this.account && this.makeCreateNode()}
             {this.makeAccountNode()}
         </div>
@@ -102,7 +102,9 @@ export default class Header extends BComp<HeaderOptions> {
         this.searchNode(this.makeSearchBar())
 
         return <header>
-            <button onClick={() => this.props.onTitleClick?.()} id="title">GreenRally</button>
+            <div>
+                <button onClick={() => this.props.onTitleClick?.()} id="title">GreenRally</button>
+            </div>
             {this.searchNode()}
             {this.accountElm()}
         </header>
