@@ -56,5 +56,5 @@ declare global {
 		type img = JSX.IntrinsicElements['img']
 		type div = JSX.IntrinsicElements['div']
 	}
-	type O = JSX.IntrinsicElements
+	type O = JSX.IntrinsicElements['bdi']
 }

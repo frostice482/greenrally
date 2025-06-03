@@ -1,6 +1,7 @@
 import { nodeState } from "lib/state";
 import BComp from "./bcomp";
 import Hook from "./hook";
+import { CustomHTMLElement } from "lib/custom_elm";
 
 function compareMap(a: Map<any, any>, b: Map<any, any>) {
     if (a.size !== b.size) return true
@@ -19,16 +20,14 @@ function compareMap(a: Map<any, any>, b: Map<any, any>) {
 const emptyMap =  new Map<any, any>
 
 export default abstract class BCompState<T = any> extends BComp<T> {
-    constructor(arg: T) {
-        super(arg as any)
-        this.node(this.hook)
-    }
-
     protected oldState = emptyMap
     protected internalNode = nodeState()
-    protected hook = <Hook onConnect={() => this.render()} onMove={() => this.render()}>{this.internalNode()}</Hook>
 
-    abstract getState(): object | Map<any, any>
+    protected abstract getState(): object | Map<any, any>
+
+    protected makeHook() {
+        return <Hook onConnect={() => this.render()} onMove={() => this.render()}>{this.internalNode()}</Hook>
+    }
 
     protected updateState() {
         const oldState = this.oldState
@@ -40,9 +39,16 @@ export default abstract class BCompState<T = any> extends BComp<T> {
     render(rerender = false) {
         const updated = this.updateState()
         if (!this.rendered || rerender || updated) {
-            this.internalNode(this.makeNode())
+            const n = this.makeNode()
+            if (n instanceof CustomHTMLElement) {
+                this.node(n)
+            }
+            else {
+                this.internalNode(n)
+                this.node(this.makeHook())
+            }
         }
         this.rendered = true
-        return this.hook
+        return this.node()
     }
 }

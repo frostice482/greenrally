@@ -39,8 +39,7 @@ export class URLLoader {
 		if (!conf) return
 
 		search = search instanceof URLSearchParams ? search : search ? new URLSearchParams(search) : url.searchParams
-		for (const p of conf.requiredParams)
-			if (!search.has(p)) return
+		if (conf.requiredParams.some(v => !search.has(v))) return
 
 		conf.fn(createProxyURLSearchObj(search))
 		return conf
@@ -77,9 +76,10 @@ export class URLLoaderDefault extends URLLoader {
 	 */
 	pushState(url: string, args: URLSearchParamsInit = '', push = true) {
 		if (args && !(args instanceof URLSearchParams)) args = new URLSearchParams(args)
-		if (args) args = '?' + args
+		let argsStr = args.toString()
+		if (argsStr) argsStr = '?' + argsStr
 
-		const target = '#' +  url + args
+		const target = '#' +  url + argsStr
 
 		if (push && this.shouldPush) {
 			console.debug('<url:push>', target)
