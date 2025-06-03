@@ -5,7 +5,7 @@ export default abstract class BComp<T = any> extends Component<T> {
     node = nodeState<ReactElement>()
 
     protected abstract makeNode(): ReactElement
-    protected rendered = false
+    rendered = false
 
     render(rerender = false) {
         if (!this.rendered || rerender) this.node(this.makeNode())
