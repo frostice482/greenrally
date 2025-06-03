@@ -1,20 +1,20 @@
 import { createProxyURLSearchObj } from "./util"
 
 export class URLLoader {
-	paths = new Map<string, Configuration>()
-	regexs = new Map<RegExp, Configuration>()
+	paths = new Map<string, URLLoaderConfiguration>()
+	regexs = new Map<RegExp, URLLoaderConfiguration>()
 
 	add<R extends string>(path: string | RegExp, requiredParams: readonly R[], fn: Fn<R>) {
 		return this.addConfig({ path, requiredParams, fn })
 	}
 
-	addConfig(conf: Configuration) {
+	addConfig(conf: URLLoaderConfiguration) {
 		if (typeof conf.path === 'string') this.paths.set(conf.path, conf)
 		else this.regexs.set(conf.path, conf)
 		return conf
 	}
 
-	removeConfig(confOrPath: Configuration | string | RegExp) {
+	removeConfig(confOrPath: URLLoaderConfiguration | string | RegExp) {
 		if (typeof confOrPath === 'object' && 'path' in confOrPath) confOrPath = confOrPath.path
 
 		if (typeof confOrPath === 'string') return this.paths.delete(confOrPath)
@@ -32,18 +32,18 @@ export class URLLoader {
 			if (regex.test(path)) return conf
 	}
 
-	exec(url: string | URL) {
+	exec(url: string | URL, search?: URLSearchParamsInit) {
 		if (!(url instanceof URL)) url = new URL(url, location.origin)
 
 		const conf = this.find(url)
-		if (!conf) return false
+		if (!conf) return
 
-		const search = url.searchParams
+		search = search instanceof URLSearchParams ? search : search ? new URLSearchParams(search) : url.searchParams
 		for (const p of conf.requiredParams)
-			if (!search.has(p)) return false
+			if (!search.has(p)) return
 
 		conf.fn(createProxyURLSearchObj(search))
-		return true
+		return conf
 	}
 }
 
@@ -97,7 +97,7 @@ export class URLLoaderDefault extends URLLoader {
 const urlLoader = new URLLoaderDefault()
 export default urlLoader
 
-interface Configuration {
+export interface URLLoaderConfiguration {
 	path: string | RegExp
 	requiredParams: readonly string[]
 	fn: Fn
