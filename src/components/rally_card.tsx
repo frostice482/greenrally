@@ -1,13 +1,18 @@
 import { VData } from "data"
-import BComp from "./lib/bcomp"
 import { UserIcon, Button } from "./lib/util"
 import defaultImage from "/default.webp?url"
+import BCompState from "./lib/bcomp_state"
+import Hook from "./lib/hook"
 
-export default class RallyCard extends BComp<RallyCardOptions> {
+export default class RallyCard extends BCompState<RallyCardOptions> {
     get rally() { return this.props.rally }
     set rally(v) { this.props.rally = v }
 
     title = <h2 class="linelimit-1">{this.rally.title}</h2>
+
+    protected getState() {
+        return this.rally
+    }
 
     protected makeDetail() {
         const rally = this.rally
@@ -19,13 +24,19 @@ export default class RallyCard extends BComp<RallyCardOptions> {
     }
 
     protected makeNode() {
+        this.title.textContent = this.rally.title
         const rally = this.rally
         const bgsrc = rally.pictureLinks[0]
         const bgimg = `url(${JSON.stringify(bgsrc || defaultImage)})`
 
-        const root = <div class="rally-card border bgcover" style={{backgroundImage : bgimg}}>
+        const root = <Hook
+            onConnect={() => this.render()}
+            onMove={() => this.render()}
+            class="rally-card border bgcover"
+            style={{backgroundImage : bgimg}}
+        >
             {this.makeDetail()}
-        </div>
+        </Hook>
 
         root.addEventListener('pointerenter', () => {
             this.title.classList.remove('linelimit-1')

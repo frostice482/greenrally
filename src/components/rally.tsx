@@ -3,15 +3,15 @@ import { ReactElement } from "jsx-dom"
 import Format from "lib/formats"
 import { nodeState } from "lib/state"
 import Forum from "./forum"
-import BComp from "./lib/bcomp"
 import { NamedTab, TabNode } from "./lib/namedtab"
 import { Button, UserIcon } from "./lib/util"
 import Rally_About from "./rallyc_about"
 import Rally_Forums from "./rallyc_forums"
 import Rally_Members from "./rallyc_members"
 import defaultImage from "/default.webp?url"
+import BCompState from "./lib/bcomp_state"
 
-export default class RallyContainer extends BComp<RallyContainerOptions> {
+export default class RallyContainer extends BCompState<RallyContainerOptions> {
     tabs = new NamedTab<RallyTabs>({
         about: new Rally_About(this.rally),
         forums: new Rally_Forums({
@@ -37,12 +37,16 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
 
     forumCache = new WeakMap<VData.Forum, Forum>()
 
+    protected getState() {
+        return this.rally
+    }
+
     protected updateJoin() {
         const isEditable = this.rally.isActivity || this.rally.startTime > Date.now()
         let newBtn
         if (!isEditable) {}
         else if (this.owner) {
-            newBtn = <Button hollow class="rally-edit-button" onClick={this.props.onEdit}/>
+            newBtn = <Button hollow class="rally-edit-button" onClick={() => this.props.onEdit?.(this.rally)}/>
         }
         else {
             if (this.joined)
@@ -146,5 +150,5 @@ export interface RallyContainerOptions {
     onProfileClick?: (user: VData.User) => void
     onJoin?: () => boolean | void | undefined
     onLeave?: () => boolean | void | undefined
-    onEdit?: () => void
+    onEdit?: (rally: VData.Rally) => void
 }

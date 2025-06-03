@@ -50,7 +50,7 @@ export default class Header extends BComp<HeaderOptions> {
 
     protected makeAccountNode() {
         const acc = this.account
-        if (acc) return <button id="account-button" class="flex-aa" onClick={this.props.onProfile}>
+        if (acc) return <button id="account-button" class="flex-aa" onClick={() => this.props.onProfile?.(this.account!)}>
             <b>{acc.name}</b>
             <Avatar dark src={acc.pictureLink} width="2.5em"/>
         </button>
@@ -95,7 +95,7 @@ export default class Header extends BComp<HeaderOptions> {
             cnt.style.width = rect.width + 'px'
         })
 
-        return String(location).endsWith('/') ? elm : <div/>
+        return elm
     }
 
     protected makeNode() {
@@ -123,7 +123,7 @@ export function HeaderSearch(opts: { rally: VData.Rally } & O.button) {
 export interface HeaderOptions {
     onTitleClick?: () => void
     onRallyClick?: (rally: VData.Rally) => void
-    onProfile?: () => void
+    onProfile?: (profile: VData.User) => void
     onLogin?: () => void
     onSearch?: (search: string) => void
     onSearchPreview?: (search: string) => void

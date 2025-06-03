@@ -51,8 +51,8 @@ export default class RallyList extends BComp<RallyListOptions> {
         }
     }
 
-    updateRallyList(rallies: readonly VData.Rally[] = this.props.rallies, removeUnused = false) {
-        this.props.rallies = rallies
+    updateRallyList(rallies: Iterable<VData.Rally> = this.props.rallies, removeUnused = false) {
+        this.props.rallies = Array.from(rallies)
         const unused = new Set(this.rallyList.keys())
 
         for (const rally of rallies) {
@@ -71,6 +71,15 @@ export default class RallyList extends BComp<RallyListOptions> {
         if (removeUnused) {
             for (const rally of unused) this.rallyList.delete(rally)
         }
+        return this
+    }
+
+    updateAll(removeUnused?: boolean) {
+        this.updateRallyList(undefined, removeUnused)
+        this.updateTagList(removeUnused)
+        this.updateRallyList()
+        this.updateRallyListElement()
+        this.selectTag()
     }
 
     updateRallyListElement() {
@@ -87,7 +96,7 @@ export default class RallyList extends BComp<RallyListOptions> {
         this.updateRallyListElement()
         this.updateTagList()
 
-        return <div>
+        return <div class="rally-list-container">
             {!this.props.hideTags && this.tagListElm}
             {this.rallyListElm}
         </div>
@@ -95,7 +104,7 @@ export default class RallyList extends BComp<RallyListOptions> {
 }
 
 export interface RallyListOptions {
-    rallies: readonly VData.Rally[]
+    rallies: Iterable<VData.Rally>
     hideTags?: boolean
 
     onRallyClick?: (rally: VData.Rally, elm: RallyCard) => void
