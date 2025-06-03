@@ -1,8 +1,8 @@
 import { VData } from "data";
 import BComp from "./bcomp";
-import { Image, userImgSrc } from "./util";
 import RallyList from "./rally_list";
 import RallyCard from "./rally_card";
+import { Avatar } from "./util";
 
 export default class Profile extends BComp<UserOptions> {
     protected makeOptions() {
@@ -15,7 +15,7 @@ export default class Profile extends BComp<UserOptions> {
         const user = this.props.user
         const isCur = this.props.isCurrent
         return <div class="container-large flex-aa">
-            <Image src={userImgSrc(user.pictureLink, 'dark')} width="5em"/>
+            <Avatar dark src={user.pictureLink} width="5em"/>
             <div class="flex-fill">
                 <h1>{user.name}</h1>
                 {isCur && <span>{user.email}</span>}

@@ -1,12 +1,12 @@
 import { VData } from "data";
 import BComp from "./bcomp";
-import { userImgSrc, Image } from "./util";
 import Format from "lib/formats";
+import { Avatar } from "./util";
 
 export default class Rally_Forums extends BComp<RallyForumOptions> {
     protected makeForum(forum: VData.Forum) {
         return <button class="rally-forum-container container border fill-x bigside-left" onClick={() => this.props.onForumClick?.(forum)}>
-            <Image src={userImgSrc(forum.author.pictureLink, 'dark')} width="3em"/>
+            <Avatar dark src={forum.author.pictureLink} width="3em"/>
             <div> <b>{forum.author.name}</b> {Format.dateTime.format(forum.time)} </div>
             <h2> {forum.title}</h2>
         </button>

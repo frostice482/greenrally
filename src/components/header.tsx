@@ -2,7 +2,7 @@ import { nodeState } from "lib/state";
 import BComp from "./bcomp";
 import { VData } from "data";
 import { ReactElement } from "jsx-dom";
-import { Button, Image, userImgSrc } from "./util";
+import { Avatar, Button } from "./util";
 import { refreshingTimeout } from "lib/util";
 import searchUrl from "/search.svg?url"
 import calendarUrl from "/calendar.svg?url"
@@ -52,7 +52,7 @@ export default class Header extends BComp<HeaderOptions> {
         const acc = this.account
         if (acc) return <button id="account-button" class="flex-aa" onClick={this.props.onProfile}>
             <b>{acc.name}</b>
-            <Image src={userImgSrc(acc.pictureLink, 'dark')} width="2.5em"/>
+            <Avatar dark src={acc.pictureLink} width="2.5em"/>
         </button>
 
         return <Button id="login-button" onClick={this.props.onLogin}>Login</Button>

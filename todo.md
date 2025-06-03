@@ -3,9 +3,6 @@
 
 ## Consistency and Standards
 - `I` Tidak ada navigasi di website, mana home, event, about website, header, footer
-- `I` Gambar profile dari icon bentuk round, ketika ditambah gambar jadi kotak
-- `R` sesuaikan dengan standarisasi sebuah website
-- `R` ketika gambar dimasukkan di profile, harusnya tetap bentuknya round jangan ada round ada kotak
 
 ## Recognition Rather than Recall
 - `I` Bagi pengguna pertama akan bingung ketika menggunakan search karena tidak tahu apa yang ingin dicari.

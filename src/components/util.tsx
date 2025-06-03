@@ -10,15 +10,10 @@ export function RallyTag(opts: { name: string } & O.div) {
     return elm
 }
 
-export function userImgSrc(url: string, defaultImg?: string) {
-    if (defaultImg === 'dark') defaultImg = userDarkUrl
-    return url || defaultImg || userUrl
-}
-
 export function UserIcon(opts: UserOptions & O.button) {
     const user = opts.user
     const elm = <button {...opts}>
-        <Image src={userImgSrc(user.pictureLink, opts.defaultImage)} width={opts.imageSize}/>
+        <Avatar src={user.pictureLink}/>
         {opts.children ? <span>{user.name}</span> : user.name}
         {opts.children}
     </button>
@@ -45,6 +40,14 @@ export function Button(opts: ButtonOptions & O.button) {
     return elm
 }
 
+const buttonSizeOpts: Record<ButtonSizeOpts, string> = {
+    s: 'container-small',
+    m: 'container',
+    l: 'container-large',
+    none: '',
+    x: 'container-xsmall'
+}
+
 export function Discardable(opts: DiscardableOptions & O.div) {
     const btn = jsx('button', opts.buttionOpions ?? {})
     btn.append('x')
@@ -56,12 +59,16 @@ export function Discardable(opts: DiscardableOptions & O.div) {
     return r
 }
 
-const buttonSizeOpts: Record<ButtonSizeOpts, string> = {
-    s: 'container-small',
-    m: 'container',
-    l: 'container-large',
-    none: '',
-    x: 'container-xsmall'
+export function Avatar(opts: AvatarOptions & O.img) {
+    opts.src ||= opts.dark ? userDarkUrl : userUrl
+    const elm = jsx(Image, opts)
+    elm.classList.add('avatar')
+    return elm
+}
+
+export interface AvatarOptions extends ImageContainerOptions {
+    dark?: boolean
+    src: string
 }
 
 export interface DiscardableOptions {
