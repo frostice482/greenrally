@@ -1,6 +1,6 @@
 import { VData } from "data";
-import BComp from "./bcomp";
-import { Avatar } from "./util";
+import BComp from "./lib/bcomp";
+import { Avatar } from "./lib/util";
 import Format from "lib/formats";
 
 export default class Forum extends BComp<ForumOptions> {

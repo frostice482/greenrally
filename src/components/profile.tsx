@@ -1,8 +1,8 @@
-import { VData } from "data";
-import BComp from "./bcomp";
-import RallyList from "./rally_list";
-import RallyCard from "./rally_card";
-import { Avatar } from "./util";
+import { VData } from "data"
+import BComp from "./lib/bcomp"
+import { Avatar } from "./lib/util"
+import RallyCard from "./rally_card"
+import RallyList from "./rally_list"
 
 export default class Profile extends BComp<UserOptions> {
     protected makeOptions() {

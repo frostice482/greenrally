@@ -1,5 +1,5 @@
+import XInput from "./lib/xinput";
 import Login from "./login";
-import XInput from "./xinput";
 
 export default class Register extends Login {
     title = 'Register'

@@ -1,7 +1,7 @@
-import { VData } from "data";
-import BComp from "./bcomp";
-import Format from "lib/formats";
-import { Avatar } from "./util";
+import { VData } from "data"
+import Format from "lib/formats"
+import BComp from "./lib/bcomp"
+import { Avatar } from "./lib/util"
 
 export default class Rally_Forums extends BComp<RallyForumOptions> {
     protected makeForum(forum: VData.Forum) {

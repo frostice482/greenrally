@@ -1,7 +1,7 @@
-import { VData } from "data";
-import BComp from "./bcomp";
-import { UserIcon } from "./util";
-import resizeListener from "lib/resize";
+import { VData } from "data"
+import resizeListener from "lib/resize"
+import BComp from "./lib/bcomp"
+import { UserIcon } from "./lib/util"
 
 export default class Rally_Members extends BComp<RallyMemberOptions> {
     protected makeUser(user: VData.User) {

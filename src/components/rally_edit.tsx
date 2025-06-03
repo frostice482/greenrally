@@ -1,8 +1,8 @@
-import { textState } from "lib/state";
-import BComp from "./bcomp";
-import { Button, Discardable } from "./util";
-import { VData } from "data";
-import { roundInterval } from "lib/util";
+import { VData } from "data"
+import { textState } from "lib/state"
+import { roundInterval } from "lib/util"
+import BComp from "./lib/bcomp"
+import { Button, Discardable } from "./lib/util"
 
 export default class RallyEdit extends BComp<RallyEditOptions> {
     titleInput = <input class="fill-x" type="text" placeholder="Rally Title"/> as E.input

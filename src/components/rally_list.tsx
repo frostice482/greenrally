@@ -1,8 +1,8 @@
-import { VData } from "data";
-import BComp from "./bcomp";
-import { ReactElement } from "jsx-dom";
-import RallyCard from "./rally_card";
-import { RallyTag } from "./util";
+import { VData } from "data"
+import { ReactElement } from "jsx-dom"
+import BComp from "./lib/bcomp"
+import { RallyTag } from "./lib/util"
+import RallyCard from "./rally_card"
 
 export default class RallyList extends BComp<RallyListOptions> {
     tagList = new Map<string, ReactElement>()

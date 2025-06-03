@@ -1,13 +1,13 @@
-import { nodeState } from "lib/state";
-import BComp from "./bcomp";
-import { VData } from "data";
-import { ReactElement } from "jsx-dom";
-import { Avatar, Button } from "./util";
-import { refreshingTimeout } from "lib/util";
 import searchUrl from "/search.svg?url"
 import calendarUrl from "/calendar.svg?url"
 import plusUrl from "/plus.svg?url"
-import resizeListener from "lib/resize";
+import { VData } from "data"
+import { ReactElement } from "jsx-dom"
+import resizeListener from "lib/resize"
+import { nodeState } from "lib/state"
+import { refreshingTimeout } from "lib/util"
+import BComp from "./lib/bcomp"
+import { Avatar, Button } from "./lib/util"
 
 export default class Header extends BComp<HeaderOptions> {
     searchInput = <input

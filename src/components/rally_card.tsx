@@ -1,6 +1,6 @@
-import { VData } from "data";
-import BComp from "./bcomp";
-import { Button, UserIcon } from "./util";
+import { VData } from "data"
+import BComp from "./lib/bcomp"
+import { UserIcon, Button } from "./lib/util"
 import defaultImage from "/default.webp?url"
 
 export default class RallyCard extends BComp<RallyCardOptions> {

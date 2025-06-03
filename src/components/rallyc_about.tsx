@@ -1,5 +1,5 @@
-import { VData } from "data";
-import BComp from "./bcomp";
+import { VData } from "data"
+import BComp from "./lib/bcomp"
 
 export default class Rally_About extends BComp {
     constructor(rally: VData.Rally) {
@@ -7,7 +7,7 @@ export default class Rally_About extends BComp {
         this.rally = rally
     }
 
-    rally:VData.Rally
+    rally: VData.Rally
 
     protected makeNode() {
         const rally = this.rally

@@ -1,7 +1,8 @@
-import { nodeState } from "lib/state";
-import BComp from "./bcomp";
-import XInput from "./xinput";
-import { Button } from "./util";
+import { nodeState } from "lib/state"
+import BComp from "./lib/bcomp"
+import { Button } from "./lib/util"
+import XInput from "./lib/xinput"
+
 
 export default class Login extends BComp<LoginOptions> {
     constructor(opts: LoginOptions) {
