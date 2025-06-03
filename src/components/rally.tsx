@@ -13,13 +13,13 @@ import defaultImage from "/default.webp?url"
 
 export default class RallyContainer extends BComp<RallyContainerOptions> {
     tabs = new NamedTab<RallyTabs>({
-        about: new Rally_About(this.props.rally),
+        about: new Rally_About(this.rally),
         forums: new Rally_Forums({
-            rally: this.props.rally,
+            rally: this.rally,
             onForumClick: forum => this.switchToForum(forum)
         }),
         members: new Rally_Members({
-            rally: this.props.rally,
+            rally: this.rally,
             onProfileClick: user => this.props.onProfileClick?.(user)
         })
     }, 'about')
@@ -30,12 +30,15 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
     get owner() { return this.props.isCreator ?? false }
     set owner(v) { this.props.isCreator = v }
 
+    get rally() { return this.props.rally }
+    set rally(v) { this.props.rally = v }
+
     joinBtn = nodeState<ReactElement>()
 
     forumCache = new WeakMap<VData.Forum, Forum>()
 
     protected updateJoin() {
-        const isEditable = this.props.rally.isActivity || this.props.rally.startTime > Date.now()
+        const isEditable = this.rally.isActivity || this.rally.startTime > Date.now()
         let newBtn
         if (!isEditable) {}
         else if (this.owner) {
@@ -111,8 +114,7 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
     }
 
     protected makeHeader() {
-        const rally = this.props.rally
-        const bg = `linear-gradient(to bottom, #0007), url(${JSON.stringify(rally.pictureLinks[0] || defaultImage)})`
+        const bg = `linear-gradient(to bottom, #0007), url(${JSON.stringify(this.rally.pictureLinks[0] || defaultImage)})`
 
         return <div class="rally-header bgcover grid-4" style={{backgroundImage: bg}}>
             <div></div>
@@ -123,6 +125,7 @@ export default class RallyContainer extends BComp<RallyContainerOptions> {
     }
 
     protected makeNode() {
+        this.tabs.resetAll()
         return <div class="rally">
             {this.makeHeader()}
             {this.tabs.contentNode()}

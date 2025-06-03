@@ -4,10 +4,13 @@ import { UserIcon, Button } from "./lib/util"
 import defaultImage from "/default.webp?url"
 
 export default class RallyCard extends BComp<RallyCardOptions> {
-    title = <h2 class="linelimit-1">{this.props.rally.title}</h2>
+    get rally() { return this.props.rally }
+    set rally(v) { this.props.rally = v }
+
+    title = <h2 class="linelimit-1">{this.rally.title}</h2>
 
     protected makeDetail() {
-        const rally = this.props.rally
+        const rally = this.rally
         return <div class="rally-card-detail bigside-top">
             {this.title}
             <UserIcon user={rally.author} onClick={() => this.props.onProfileClick?.(rally.author)}/>
@@ -16,7 +19,7 @@ export default class RallyCard extends BComp<RallyCardOptions> {
     }
 
     protected makeNode() {
-        const rally = this.props.rally
+        const rally = this.rally
         const bgsrc = rally.pictureLinks[0]
         const bgimg = `url(${JSON.stringify(bgsrc || defaultImage)})`
 
