@@ -46,6 +46,12 @@ export class NamedTab<Obj extends Partial<Record<never, TabContent>>, Events = {
 		if (content && this.contentNode() !== (content instanceof Node ? content : content.render())) this._setTab(tab, content)
 		return content
 	}
+
+	resetAll() {
+		for (const k of Object.values(this.tabs) as TabContent[]) {
+			if (k instanceof BComp) k.rendered = false
+		}
+	}
 }
 
 
