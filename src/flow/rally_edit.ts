@@ -63,6 +63,10 @@ async function onEditPost(post: RallyEditData) {
     alert(post.currentEditId ? "Edit successful" : "Successfully created a new rally")
 }
 
+self.addEventListener('beforeunload', ev => {
+    if (create?.hasData()) ev.preventDefault()
+})
+
 declare global {
     interface MainRoutes {
         '/edit': {
