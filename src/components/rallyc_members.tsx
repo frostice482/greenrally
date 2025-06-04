@@ -5,7 +5,7 @@ import { UserIcon } from "./lib/util"
 
 export default class Rally_Members extends BComp<RallyMemberOptions> {
     protected makeUser(user: VData.User) {
-        return <UserIcon defaultImage="dark" imageSize="2.5em" user={user} onClick={() => this.props.onProfileClick?.(user)}/>
+        return <UserIcon dark avatarWidth="2.5em" user={user} onClick={() => this.props.onProfileClick?.(user)}/>
     }
 
     protected makeUsers(users: readonly VData.User[]) {

@@ -13,7 +13,7 @@ export function RallyTag(opts: { name: string } & O.div) {
 export function UserIcon(opts: UserOptions & O.button) {
     const user = opts.user
     const elm = <button {...opts}>
-        <Avatar src={user.pictureLink}/>
+        <Avatar dark={opts.dark} src={user.pictureLink} width={opts.avatarWidth} height={opts.avatarHeight}/>
         {opts.children ? <span>{user.name}</span> : user.name}
         {opts.children}
     </button>
@@ -90,6 +90,7 @@ export interface ImageContainerOptions {
 
 export interface UserOptions {
     user: VData.User,
-    imageSize?: string
-    defaultImage?: string
+    dark?: boolean
+    avatarWidth?: string
+    avatarHeight?: string
 }
