@@ -239,7 +239,7 @@ export default class RallyEdit extends BComp<RallyEditOptions> {
 
     hasData() {
         return Boolean(this.titleInput.value
-            || this.dateEndInput.value
+            || this.descriptionInput.value
             || this.tagsList.size)
     }
 }
