@@ -16,9 +16,15 @@ export default class Login extends BComp<LoginOptions> {
     formNode = nodeState<HTMLFormElement>()
 
     protected makeFooter() {
-        return <small class="fill-x">
-            Don't have an account?
-            <a class="right" onClick={() => this.props.onSwitch?.()}>Register</a>
+        return <small class="fill-x flex-col" style={{gap: '6px'}}>
+            <div>
+                Don't have an account?
+                <a class="right" onClick={() => this.props.onSwitch?.()}>Register</a>
+            </div>
+            <div>
+                Forgot password?
+                <a class="right" onClick={() => this.props.onForgotPassword?.()}>Recover</a>
+            </div>
         </small>
     }
 
@@ -50,4 +56,5 @@ export default class Login extends BComp<LoginOptions> {
 export interface LoginOptions {
     onSwitch?: () => void
     onSubmit?: (formdata: FormData) => void
+    onForgotPassword?: () => void
 }
